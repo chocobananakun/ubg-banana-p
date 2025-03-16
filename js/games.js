@@ -36,9 +36,10 @@ function renderGames() {
         categoryTitle.textContent = category || 'All Games';
     }
 
-    const filteredGames = category
-        ? games.filter(game => game.category.split(',').includes(category))
-        : games;
+const filteredGames = category
+    ? games.filter(game => game.category.split(',').map(c => c.trim()).includes(category))
+    : games;
+
 
     gameGrid.innerHTML = filteredGames.map(createGameCard).join('');
 }
