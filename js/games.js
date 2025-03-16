@@ -3,7 +3,7 @@ const games = [
     { name: "Slope", image: "image/slope.png", description: "Endless Runner", link: "/slope.html", category: "Arcade,Action" },
     { name: "run 3", image: "image/slope.png", description: "Action", link: "/run-3.html", category: "Action" },
     { name: "Gun Mayhem", image: "image/vex-8.png", description: "Action, Shooting", link: "/run-3.html", category: "Action,Shooting" },
-    { name: "run 4", image: "image/slope.png", description: "Action", link: "/run-4.html", category: "Action" },
+    { name: "run 4", image: "image/vex-8.png", description: "Action", link: "/run-4.html", category: "Action,Arcade" },
 ];
 
 /*createGameCard*/
