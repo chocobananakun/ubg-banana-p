@@ -1,117 +1,87 @@
-name: Generate Sitemap
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ubgx88.github.io - Unblocked Games</title>
+    <meta name="description" content="Unblocked Games at Ubgx88 play free.">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="js/ad-manager.js" defer></script>
+    
+<!-- Google tag (gtag.js) -->
 
-on:
-  push:
-    branches: [ gh-pages ]
-  workflow_dispatch:
+    <!-- Google tag (gtag.js) -->
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Ubgx88 Games",
+        "url": "https://ubgx88.github.io",
+        "description": "Free online games for all ages. Play a variety of exciting games directly in your browser without downloads.",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://ubgx88.github.io/search?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        },
+        "genre": ["Online Games", "Browser Games", "Free Games"],
+        "audience": {
+          "@type": "PeopleAudience",
+          "suggestedMinAge": "6"
+        },
+        "inLanguage": "en",
+        "isAccessibleForFree": true,
+        "keywords": "online games, free games, browser games, puzzle games, action games, strategy games",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        }
+      }
+    </script>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo-container">
+                <a href="./" class="logo">
+                    <i class="fas fa-gamepad"></i>
+                    <span>Ubgx88</span>
+                </a>
+            </div>
+            <nav class="main-nav">
+                <ul id="categoryList">
 
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: gh-pages
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
-      - name: Create Sitemap Generator Script
-        run: |
-          cat > generate-sitemap.js << 'EOL'
-          const fs = require('fs');
-          const path = require('path');
-          const { parseString } = require('xml2js');
-          const util = require('util');
-          const parseXml = util.promisify(parseString);
-
-          async function generateSitemap() {
-            try {
-              // Read existing sitemap if it exists
-              let existingUrls = new Set();
-              if (fs.existsSync('sitemap.xml')) {
-                console.log('Reading existing sitemap.xml...');
-                const existingSitemap = fs.readFileSync('sitemap.xml', 'utf8');
-                const result = await parseXml(existingSitemap);
-                if (result.urlset && result.urlset.url) {
-                  result.urlset.url.forEach(url => {
-                    existingUrls.add(url.loc[0]);
-                  });
-                }
-                console.log('Found', existingUrls.size, 'existing URLs');
-              }
-
-              // Read games data
-              console.log('Reading games.js file...');
-              const gamesContent = fs.readFileSync('js/games.js', 'utf8');
-              const gamesMatch = gamesContent.match(/const\s+games\s*=\s*(\[[\s\S]*\])\s*;/);
-              if (!gamesMatch) {
-                throw new Error('Could not find games array in file');
-              }
-              
-              const games = eval(gamesMatch[1]);
-              console.log('Found', games.length, 'games');
-
-              // Generate URLs from games
-              const baseUrl = 'https://ubgx88.github.io';
-              
-              // Add homepage URL
-              const staticUrls = [
-                {
-                  url: baseUrl + '/',
-                  priority: '1.0',
-                  changefreq: 'daily'
-                }
-              ];
-              
-              // Combine all URLs
-              const gameUrls = games.map(game => ({
-                url: baseUrl + game.link,
-                priority: '0.8',
-                changefreq: 'weekly'
-              }));
-              
-              const allUrls = [...staticUrls, ...gameUrls];
-              console.log('Total URLs:', allUrls.length);
-
-              // Generate new sitemap content
-              const sitemapContent = `<?xml version="1.0" encoding="UTF-8"?>
-              <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-                ${allUrls.map(urlObj => `
-                  <url>
-                    <loc>${urlObj.url}</loc>
-                    <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
-                    <changefreq>${urlObj.changefreq}</changefreq>
-                    <priority>${urlObj.priority}</priority>
-                  </url>
-                `).join('')}
-              </urlset>`.trim();
-
-              console.log('Writing updated sitemap.xml...');
-              fs.writeFileSync('sitemap.xml', sitemapContent);
-              console.log('Sitemap updated successfully!');
-            } catch (error) {
-              console.error('Error generating sitemap:', error);
-              process.exit(1);
-            }
-          }
-
-          generateSitemap();
-          EOL
-
-      - name: Install xml2js
-        run: npm install xml2js
-
-      - name: Generate Sitemap
-        run: node generate-sitemap.js
-
-      - name: Commit and Push Changes
-        run: |
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git add sitemap.xml
-          git commit -m "Update sitemap.xml" || echo "No changes to commit"
-          git push
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <div class="ad-container" data-ad-slot="ad-slot-970x250"></div>
+        <div class="game-section">
+            <h2>Latest Games</h2>
+            <div class="game-grid" id="gameGrid"></div>
+        </div>
+        <div class="ad-container" data-ad-slot="ad-slot-728x90"></div>
+    </main>
+    <div class="description">
+        <p>Ubgx88.github.io is a free online gaming website that offers a wide variety of exciting games for players of all ages. The site focuses on browser-based games that can be played instantly without the need for downloads or additional software installation. With its user-friendly interface and a diverse collection of games spanning genres such as action, puzzle, adventure, and sports, Ubgx88.github.io is an ideal destination for those seeking quick and easy entertainment. The website regularly updates its game library, ensuring there's always fresh content for players to explore and enjoy. Whether you're looking to pass a few minutes or dive into hours of gameplay, Ubgx88.github.io provides a fun and accessible gaming experience for casual and dedicated gamers alike.</p>
+    </div>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="about-us.html">About US</a>
+                <a href="terms-of-use.html">Terms Of Use</a>
+                <a href="privacy-policy.html">Privacy Policy</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="copyright">
+                &copy; 2024 Ubgx88.github.io. Play Unblocked Games.
+            </div>
+        </div>
+    </footer>
+    <script src="/js/games.js"></script>
+    <script src="js/categories.js" defer></script>
+</body>
+</html>
