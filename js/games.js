@@ -4,6 +4,7 @@ const games = [
     { name: "Run 3", image: "image/run3.jpg", description: "Action", link: "/run-3.html", category: "Action" },
     { name: "Gun Mayhem", image: "image/vex-8.png", description: "Action, Shooting", link: "/run-3.html", category: "Action,Shooting" },
     { name: "Run 4", image: "image/run3.jpg", description: "Action", link: "/run-4.html", category: "Arcade" },
+    { name: "Run 10", image: "image/run3.jpg", description: "Action", link: "/run-10.html", category: "Arcade" },
 ];
 
 /*createGameCard*/
