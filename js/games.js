@@ -1,7 +1,7 @@
 const games = [
     { name: "Vex 8", image: "image/vex-8.png", description: "Endless Runner", link: "/vex-8.html", category: "Arcade,Action" },
     { name: "Slope", image: "image/slope.png", description: "Endless Runner", link: "/slope.html", category: "Arcade,Action" },
-    { name: "Run 3", image: "https://ubg100.github.io/assets/img/games/run3.jpg", description: "Action", link: "/run-3.html", category: "Action" },
+    { name: "Run 3", image: "image/run3.jpg", description: "Action", link: "/run-3.html", category: "Action" },
     { name: "Gun Mayhem", image: "image/vex-8.png", description: "Action, Shooting", link: "/run-3.html", category: "Action,Shooting" },
 ];
 
