@@ -5,6 +5,7 @@ const games = [
     { name: "Pac-man", image: "image/pac-man.png", description: "Arcade", link: "/pac-man.html", category: "Arcade" },
     { name: "2048", image: "image/2048.png", description: "Puzzle", link: "/2048.html", category: "Puzzle" },
     { name: "Fireboy And Watergirl 1", image: "image/fireboy-and-watergirl-1.jfif", description: "Puzzle", link: "/Fireboy-And-Watergirl-1.html", category: "Puzzle,Adventure" },
+    { name: "Vex X3M 2", image: "image/2048.png", description: "Adventure", link: "/vex-x3m-2.html", category: "Action,Adventure" },
 ];
 
 /*createGameCard*/
