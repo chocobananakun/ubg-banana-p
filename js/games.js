@@ -4,7 +4,7 @@ const games = [
     { name: "Run 3", image: "image/run3.jpg", description: "Action", link: "/run-3.html", category: "Action" },
     { name: "Pac-man", image: "image/pac-man.png", description: "Arcade", link: "/pac-man.html", category: "Arcade" },
     { name: "2048", image: "image/2048.png", description: "Puzzle", link: "/2048.html", category: "Puzzle" },
-    { name: "Fireboy And Watergirl 1", image: "image/fireboy-and-watergirl-1.jfif", description: "Puzzle", link: "/fireboy-and-watergirl-1.html", category: "Puzzle,Adventure" },
+    { name: "Fireboy And Watergirl 1", image: "image/fireboy-and-watergirl-1.jfif", description: "Puzzle", link: "/Fireboy-And-Watergirl-1.html", category: "Puzzle,Adventure" },
 ];
 
 /*createGameCard*/
