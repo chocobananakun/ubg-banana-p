@@ -10,6 +10,7 @@ const games = [
     { name: "Tunnel Rush", image: "image/tunnel-rush.png", description: "Endless Runner", link: "/tunnel-rush.html", category: "Adventure" },
     { name: "Tanuki Sunset", image: "image/tanuki-sunset.png", description: "Sports", link: "/tanuki-sunset.html", category: "Sports" },
     { name: "Basketball Stars", image: "image/basketball-stars.png", description: "Sports", link: "/basketball-stars.html", category: "Sports" },
+    { name: "Getaway Shootout", image: "image/getaway-shootout.png", description: "Action", link: "/getaway-shootout.html", category: "Action" },
 ];
 
 /*createGameCard*/
