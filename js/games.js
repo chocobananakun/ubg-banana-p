@@ -8,7 +8,7 @@ const games = [
     { name: "Vex X3M 2", image: "image/vex-x3m-2.jpg", description: "Adventure", link: "/vex-x3m-2.html", category: "Action,Adventure" },
     { name: "Moto X3M Pool Party", image: "image/moto-x3m-pool-party.jpeg", description: "Adventure", link: "/moto-x3m-pool-party.html", category: "Action,Adventure" },
     { name: "Tunnel Rush", image: "image/tunnel-rush.png", description: "Endless Runner", link: "/tunnel-rush.html", category: "Adventure" },
-    { name: "Tunnel Rush", image: "image/tanuki-sunset.png", description: "Sports", link: "/tanuki-sunset.html", category: "Sports" },
+    { name: "Tanuki Sunset", image: "image/tanuki-sunset.png", description: "Sports", link: "/tanuki-sunset.html", category: "Sports" },
 ];
 
 /*createGameCard*/
