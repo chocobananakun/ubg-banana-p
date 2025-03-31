@@ -9,6 +9,7 @@ const games = [
     { name: "Moto X3M Pool Party", image: "image/moto-x3m-pool-party.jpeg", description: "Adventure", link: "/moto-x3m-pool-party.html", category: "Action,Adventure" },
     { name: "Tunnel Rush", image: "image/tunnel-rush.png", description: "Endless Runner", link: "/tunnel-rush.html", category: "Adventure" },
     { name: "Tanuki Sunset", image: "image/tanuki-sunset.png", description: "Sports", link: "/tanuki-sunset.html", category: "Sports" },
+    { name: "Basketball Stars", image: "image/basketball-stars.png", description: "Sports", link: "/basketball-stars.html", category: "Sports" },
 ];
 
 /*createGameCard*/
