@@ -11,6 +11,7 @@ const games = [
     { name: "Tanuki Sunset", image: "image/tanuki-sunset.png", description: "Sports", link: "/tanuki-sunset.html", category: "Sports" },
     { name: "Basketball Stars", image: "image/basketball-stars.png", description: "Sports", link: "/basketball-stars.html", category: "Sports" },
     { name: "Getaway Shootout", image: "image/getaway-shootout.png", description: "Action", link: "/getaway-shootout.html", category: "Action" },
+    { name: "Rooftop Snipers", image: "image/rooftop-snipers.png", description: "Action", link: "/rooftop-snipers.html", category: "Action" },
 ];
 
 /*createGameCard*/
