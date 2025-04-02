@@ -12,6 +12,7 @@ const games = [
     { name: "Basketball Stars", image: "image/basketball-stars.png", description: "Sports", link: "/basketball-stars.html", category: "Sports" },
     { name: "Getaway Shootout", image: "image/getaway-shootout.png", description: "Action", link: "/getaway-shootout.html", category: "Action" },
     { name: "Rooftop Snipers", image: "image/rooftop-snipers.png", description: "Action", link: "/rooftop-snipers.html", category: "Action" },
+    { name: "MX OffRoad Mountain Bike", image: "image/mx-offroad-mountain-bike.png", description: "Sports", link: "/mx-offroad-mountain-bike.html", category: "Sports" },
 ];
 
 /*createGameCard*/
