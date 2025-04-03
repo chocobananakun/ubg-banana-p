@@ -13,6 +13,7 @@ const games = [
     { name: "Getaway Shootout", image: "image/getaway-shootout.png", description: "Action", link: "/getaway-shootout.html", category: "Action" },
     { name: "Rooftop Snipers", image: "image/rooftop-snipers.png", description: "Action", link: "/rooftop-snipers.html", category: "Action" },
     { name: "MX OffRoad Mountain Bike", image: "image/mx-offroad-mountain-bike.png", description: "Sports", link: "/mx-offroad-mountain-bike.html", category: "Sports" },
+    { name: "Rooftop Snipers", image: "image/rooftop-snipers.png", description: "Action", link: "/radoll-rock-climber.html", category: "Action" },
 ];
 
 /*createGameCard*/
