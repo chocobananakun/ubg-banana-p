@@ -14,6 +14,7 @@ const games = [
     { name: "Rooftop Snipers", image: "image/rooftop-snipers.png", description: "Action", link: "/rooftop-snipers.html", category: "Action" },
     { name: "MX OffRoad Mountain Bike", image: "image/mx-offroad-mountain-bike.png", description: "Sports", link: "/mx-offroad-mountain-bike.html", category: "Sports" },
     { name: "Gold Miner", image: "image/gold-miner.png", description: "Arcade", link: "/gold-miner.html", category: "Arcade,Puzzle" },
+    { name: "Drunken Boxing", image: "image/drunken-boxing.png", description: "Sport, Boxing", link: "/drunken-boxing.html", category: "Sport" },
 ];
 
 /*createGameCard*/
