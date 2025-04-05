@@ -16,7 +16,7 @@ const games = [
     { name: "Gold Miner", image: "image/gold-miner.png", description: "Arcade", link: "/gold-miner.html", category: "Arcade,Puzzle" },
     { name: "Drunken Boxing", image: "image/drunken-boxing.png", description: "Sport, Boxing", link: "/drunken-boxing.html", category: "Sport" },
     { name: "Shadow Stickman Fight", image: "image/shadow-stickman-fight.png", description: "Fighting", link: "/shadow-stickman-fight.html", category: "Fighting" },
-    { name: "Murder Mafia", image: "image/murder-mafia.png", description: "Fighting", link: "/murder-mafia.html", category: "Fighting" },
+    { name: "Murder Mafia", image: "image/murder-mafia.png", description: "Action", link: "/murder-mafia.html", category: "Action" },
 ];
 
 /*createGameCard*/
