@@ -17,6 +17,7 @@ const games = [
     { name: "Drunken Boxing", image: "image/drunken-boxing.png", description: "Sport, Boxing", link: "/drunken-boxing.html", category: "Sport" },
     { name: "Shadow Stickman Fight", image: "image/shadow-stickman-fight.png", description: "Fighting", link: "/shadow-stickman-fight.html", category: "Fighting" },
     { name: "Murder Mafia", image: "image/murder-mafia.png", description: "Action", link: "/murder-mafia.html", category: "Action" },
+    { name: "Get A Cool Gun", image: "image/get-a-cool-gun.png", description: "Arcade", link: "/get-a-cool-gun.html", category: "Arcade" },
 ];
 
 /*createGameCard*/
