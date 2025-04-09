@@ -22,6 +22,7 @@ const games = [
     { name: "Penguin Diner", image: "image/penguin-diner.png", description: "Simulation", link: "/penguin-diner.html", category: "Simulation" },
     { name: "Soccer Euro Cup 2025", image: "image/soccer-euro-cup-2025.png", description: "Sports", link: "/soccer-euro-cup-2025.html", category: "Sports" },
     { name: "G-Switch 3", image: "image/g-switch-3.png", description: "Adventure", link: "/g-switch-3.html", category: "Adventure" },
+    { name: "Fireboy and Watergirl 2 in The Light Temple", image: "image/fireboy-and-watergirl-2-light-temple.png", description: "Adventure, Puzzle", link: "/fireboy-and-watergirl-2-light-temple.html", category: "Adventure,Puzzle" },
 ];
 
 /*createGameCard*/
