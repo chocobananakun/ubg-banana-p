@@ -20,6 +20,7 @@ const games = [
     { name: "Get A Cool Gun", image: "image/get-a-cool-gun.png", description: "Arcade", link: "/get-a-cool-gun.html", category: "Arcade" },
     { name: "Vortex 9", image: "image/vortex-9.png", description: "Shooting", link: "/vortex-9.html", category: "Shooting" },
     { name: "Penguin Diner", image: "image/penguin-diner.png", description: "Simulation", link: "/penguin-diner.html", category: "Simulation" },
+    { name: "Soccer Euro Cup 2025", image: "image/soccer-euro-cup-2025.png", description: "Sports", link: "/soccer-euro-cup-2025.html", category: "Sports" },
 ];
 
 /*createGameCard*/
