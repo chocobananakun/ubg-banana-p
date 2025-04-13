@@ -25,6 +25,7 @@ const games = [
     { name: "Fireboy and Watergirl 2 in The Light Temple", image: "image/fireboy-and-watergirl-2-light-temple.png", description: "Adventure, Puzzle", link: "/fireboy-and-watergirl-2-light-temple.html", category: "Adventure,Puzzle" },
     { name: "Archery Ragdoll", image: "image/archery-ragdoll.png", description: "Shooting", link: "/archery-ragdoll.html", category: "Shooting" },
     { name: "Hero Pipe", image: "image/hero-pipe.png", description: "Puzzle", link: "/hero-pipe.html", category: "Puzzle" },
+    { name: "Gun Mayhem 2 More Mayhem", image: "image/gun-mayhem-2-more-mayhem.png", description: "Shooting", link: "/gun-mayhem-2-more-mayhem.html", category: "Shooting" },
 ];
 
 /*createGameCard*/
