@@ -26,6 +26,7 @@ const games = [
     { name: "Archery Ragdoll", image: "image/archery-ragdoll.png", description: "Shooting", link: "/archery-ragdoll.html", category: "Shooting" },
     { name: "Hero Pipe", image: "image/hero-pipe.png", description: "Puzzle", link: "/hero-pipe.html", category: "Puzzle" },
     { name: "Bomb it 6", image: "image/bomb-it-6.png", description: "Arcade", link: "/bomb-it-6.html", category: "Arcade" },
+     { name: "Football Legends 2021", image: "image/football-legends-2021.png", description: "Sports", link: "/football-legends-2021.html", category: "Sports" },
 ];
 
 /*createGameCard*/
