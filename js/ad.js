@@ -1,14 +1,14 @@
 /*
 // File: ads.js
 const adSlots = {
-     'ad-970x250': '7979200749',
-     'ad-300x250': '9406916186',
-     'ad-728x90': '5424355442'
+     'ad-970x250': '8974918022',
+     'ad-300x250': '5227244704',
+     'ad-728x90': '1735556400'
  };
  
  function loadAdSenseScript() {
      const script = document.createElement('script');
-     script.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6556788076088xx";
+     script.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7959502586268624";
      script.async = true;
      script.crossOrigin = "anonymous";
      document.head.appendChild(script);
@@ -23,7 +23,7 @@ const adSlots = {
              const ins = document.createElement('ins');
              ins.className = 'adsbygoogle';
              ins.style.display = 'block';
-             ins.setAttribute('data-ad-client', 'ca-pub-6556788076088846');
+             ins.setAttribute('data-ad-client', 'ca-pub-7959502586268624');
              ins.setAttribute('data-ad-slot', adSlot);
              ins.setAttribute('data-ad-format', 'auto');
              ins.setAttribute('data-full-width-responsive', 'true');
