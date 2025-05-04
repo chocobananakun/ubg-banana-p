@@ -27,7 +27,7 @@ const games = [
     { name: "Hero Pipe", image: "image/hero-pipe.png", description: "Puzzle", link: "/hero-pipe.html", category: "Puzzle" },
     { name: "Bomb it 6", image: "image/bomb-it-6.png", description: "Arcade", link: "/bomb-it-6.html", category: "Arcade" },
      { name: "Football Legends 2021", image: "image/football-legends-2021.png", description: "Sports", link: "/football-legends-2021.html", category: "Sports" },
-    { name: "Kart Hooligans", image: "image/kart-hooligans.png", description: "Driving", link: "/kart-hooligans.html", category: "Simulation" },
+    { name: "Kart Hooligans", image: "image/kart_hooligans.png", description: "Driving", link: "/kart-hooligans.html", category: "Simulation" },
 ];
 
 /*createGameCard*/
