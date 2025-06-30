@@ -1,9 +1,9 @@
 const games = [
     { name: "Vex 8", image: "image/vex-8.png", description: "Endless Runner", link: "/vex-8.html", category: "Arcade,Action" },
-    { name: "Slope", image: "image/slope.png", description: "Endless Runner", link: "/slope.html", category: "Arcade,Action" },
+    { name: "Slope", image: "image/slope.png", description: "Endless Runner", link: "pages/slope.html", category: "Arcade,Action" },
     { name: "Run 3", image: "image/run3.jpg", description: "Action", link: "/run-3.html", category: "Action" },
     { name: "Pac-man", image: "image/pac-man.png", description: "Arcade", link: "/pac-man.html", category: "Arcade" },
-    { name: "2048", image: "image/2048.png", description: "Puzzle", link: "/2048.html", category: "Puzzle" },
+    { name: "2048", image: "image/2048.png", description: "Puzzle", link: "pages/2048.html", category: "Puzzle" },
     { name: "Fireboy And Watergirl 1", image: "image/fireboy-and-watergirl-1.jfif", description: "Puzzle", link: "/Fireboy-And-Watergirl-1.html", category: "Puzzle,Adventure" },
     { name: "Vex X3M 2", image: "image/vex-x3m-2.jpg", description: "Adventure", link: "/vex-x3m-2.html", category: "Action,Adventure" },
     { name: "Moto X3M Pool Party", image: "image/moto-x3m-pool-party.jpeg", description: "Adventure", link: "/moto-x3m-pool-party.html", category: "Action,Adventure" },
