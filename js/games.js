@@ -1,6 +1,6 @@
 const games = [
     { name: "Vex 8", image: "image/vex-8.png", description: "Endless Runner", link: "/vex-8.html", category: "Arcade,Action" },
-    { name: "Slope", image: "image/slope.png", description: "Endless Runner", link: "pages/slope.html", category: "Arcade,Action" },
+    { name: "Slope", image: "image/slope.png", description: "Endless Runner", link: "/pages/slope.html", category: "Arcade,Action" },
     { name: "Run 3", image: "image/run3.jpg", description: "Action", link: "/run-3.html", category: "Action" },
     { name: "Pac-man", image: "image/pac-man.png", description: "Arcade", link: "/pac-man.html", category: "Arcade" },
     { name: "2048", image: "image/2048.png", description: "Puzzle", link: "pages/2048.html", category: "Puzzle" },
