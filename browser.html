@@ -86,31 +86,27 @@
       overflow-x: auto;
     }
     .bookmark {
-  display: flex;
-  align-items: center;
-  background: #4d5156;
-  padding: 4px 8px;
-  border-radius: 5px;
-  font-size: 13px;
-  cursor: pointer;
-  white-space: nowrap;
-}
-
+      display: flex;
+      align-items: center;
+      background: #4d5156;
+      padding: 4px 8px;
+      border-radius: 5px;
+      font-size: 13px;
+      cursor: pointer;
+      white-space: nowrap;
+    }
     .bookmark.dragging {
-  opacity: 0.5;
-}
-
+      opacity: 0.5;
+    }
     .fullscreen-mode .tabs,
-.fullscreen-mode .browser-bar,
-.fullscreen-mode .bookmark-bar,
-.fullscreen-mode .tab-add-button {
-  display: none !important;
-}
-
-.fullscreen-mode .iframe-container {
-  height: 100vh;
-}
-
+    .fullscreen-mode .browser-bar,
+    .fullscreen-mode .bookmark-bar,
+    .fullscreen-mode .tab-add-button {
+      display: none !important;
+    }
+    .fullscreen-mode .iframe-container {
+      height: 100vh;
+    }
   </style>
 </head>
 <body>
@@ -131,20 +127,20 @@
   <div style="position: absolute; top: 5px; right: 5px;" class="material-icons tab-add-button" onclick="newTab()">add</div>
 
 <script>
-  let tabs = [];
-  let currentTab = null;
-  const tabsContainer = document.getElementById('tabs');
-  const frame = document.getElementById('tabFrame');
-  const urlInput = document.getElementById('urlInput');
-  const bookmarkBar = document.getElementById('bookmarkBar');
+let tabs = [];
+let currentTab = null;
+const tabsContainer = document.getElementById('tabs');
+const frame = document.getElementById('tabFrame');
+const urlInput = document.getElementById('urlInput');
+const bookmarkBar = document.getElementById('bookmarkBar');
 
-  function newTab(url = 'index.html') {
-    const id = Date.now();
-    const tab = { id, title: '読み込み中...', url };
-    tabs.push(tab);
-    renderTabs();
-    switchTab(id);
-  }
+function newTab(url = 'index.html') {
+  const id = Date.now();
+  const tab = { id, title: '読み込み中...', url };
+  tabs.push(tab);
+  renderTabs();
+  switchTab(id);
+}
 
 function renderTabs() {
   tabsContainer.innerHTML = '';
@@ -153,30 +149,20 @@ function renderTabs() {
     tabEl.className = 'tab' + (tab.id === currentTab ? ' active' : '');
     tabEl.draggable = true;
 
-tabEl.innerHTML = `
-  <img class="favicon" src="${tab.favicon || ''}" style="${tab.favicon ? '' : 'display:none;'}" />
-  <span>${tab.title}</span>
-  <span class="close" onclick="closeTab(${tab.id}); event.stopPropagation();">×</span>`;
+    tabEl.innerHTML = `
+      <img class="favicon" src="${tab.favicon || ''}" style="${tab.favicon ? '' : 'display:none;'}" />
+      <span class="title">${tab.title}</span>
+      <span class="close" onclick="closeTab(${tab.id}); event.stopPropagation();">×</span>`;
 
-    // クリックして切り替え
     tabEl.onclick = () => switchTab(tab.id);
-
-    // ドラッグ開始
     tabEl.addEventListener('dragstart', (e) => {
       tabEl.classList.add('dragging');
       e.dataTransfer.setData('text/plain', index.toString());
     });
-
-    // ドラッグ終了
     tabEl.addEventListener('dragend', () => {
       tabEl.classList.remove('dragging');
     });
-
-    // ドラッグ先での処理
-    tabEl.addEventListener('dragover', (e) => {
-      e.preventDefault(); // drop を許可
-    });
-
+    tabEl.addEventListener('dragover', (e) => e.preventDefault());
     tabEl.addEventListener('drop', (e) => {
       e.preventDefault();
       const fromIndex = parseInt(e.dataTransfer.getData('text/plain'));
@@ -184,7 +170,7 @@ tabEl.innerHTML = `
       if (fromIndex !== toIndex) {
         const movedTab = tabs.splice(fromIndex, 1)[0];
         tabs.splice(toIndex, 0, movedTab);
-        renderTabs(); // 並び替え後に再描画
+        renderTabs();
       }
     });
 
@@ -192,71 +178,85 @@ tabEl.innerHTML = `
   });
 }
 
-  function switchTab(id) {
-    const tab = tabs.find(t => t.id === id);
-    if (!tab) return;
-    currentTab = id;
-    frame.src = tab.url;
-    urlInput.value = tab.url;
-    renderTabs();
-  }
+function switchTab(id) {
+  const tab = tabs.find(t => t.id === id);
+  if (!tab) return;
+  currentTab = id;
+  frame.src = tab.url;
+  urlInput.value = tab.url;
+  renderTabs();
+}
 
 frame.addEventListener('load', () => {
   const tab = tabs.find(t => t.id === currentTab);
   if (!tab) return;
+
   try {
     const doc = frame.contentDocument || frame.contentWindow.document;
-    tab.title = doc.title || tab.url;
-    tab.url = frame.contentWindow.location.href;
+    const loc = frame.contentWindow.location;
 
-    // ファビコン取得（相対URL対応）
+    tab.title = doc.title || loc.href || tab.url;
+    tab.url = loc.href;
+
     const iconLink = doc.querySelector("link[rel~='icon']");
-    tab.favicon = iconLink ? new URL(iconLink.getAttribute('href'), tab.url).href : null;
+    if (iconLink) {
+      try {
+        tab.favicon = new URL(iconLink.getAttribute('href'), tab.url).href;
+      } catch {
+        tab.favicon = iconLink.getAttribute('href');
+      }
+    } else {
+      try {
+        tab.favicon = new URL('favicon.ico', tab.url).href;
+      } catch {
+        tab.favicon = 'default-favicon.png';
+      }
+    }
 
     urlInput.value = tab.url;
     renderTabs();
   } catch (e) {
-    // クロスオリジン制限など
+    console.warn("読み込み失敗またはCORS制限", e);
   }
 });
 
-  function closeTab(id) {
-    tabs = tabs.filter(t => t.id !== id);
-    if (currentTab === id && tabs.length) {
-      switchTab(tabs[0].id);
-    } else if (tabs.length === 0) {
-      currentTab = null;
-      frame.src = '';
-      urlInput.value = '';
-    } else {
-      renderTabs();
-    }
+function closeTab(id) {
+  tabs = tabs.filter(t => t.id !== id);
+  if (currentTab === id && tabs.length) {
+    switchTab(tabs[0].id);
+  } else if (tabs.length === 0) {
+    currentTab = null;
+    frame.src = '';
+    urlInput.value = '';
+  } else {
+    renderTabs();
   }
+}
 
-  function navigateToURL(url) {
-    const tab = tabs.find(t => t.id === currentTab);
-    if (tab) {
-      tab.url = url;
-      frame.src = url;
-      renderTabs();
-    }
+function navigateToURL(url) {
+  const tab = tabs.find(t => t.id === currentTab);
+  if (tab) {
+    tab.url = url;
+    frame.src = url;
+    renderTabs();
   }
+}
 
-  function goBack() { frame.contentWindow.history.back(); }
-  function goForward() { frame.contentWindow.history.forward(); }
-  function reloadPage() { frame.contentWindow.location.reload(); }
-  function copyURL() { navigator.clipboard.writeText(urlInput.value); }
+function goBack() { frame.contentWindow.history.back(); }
+function goForward() { frame.contentWindow.history.forward(); }
+function reloadPage() { frame.contentWindow.location.reload(); }
+function copyURL() { navigator.clipboard.writeText(urlInput.value); }
 
-  function addBookmark() {
+function addBookmark() {
   const tab = tabs.find(t => t.id === currentTab);
   if (tab) {
     const bookmarks = loadBookmarks();
     bookmarks.push({ title: tab.title, url: tab.url });
     saveBookmarks(bookmarks);
     renderBookmarks();
-    }
   }
-  
+}
+
 function renderBookmarks() {
   bookmarkBar.innerHTML = '';
   const bookmarks = loadBookmarks();
@@ -274,7 +274,6 @@ function renderBookmarks() {
       <span class="material-icons bookmark-delete" style="margin-left:6px;cursor:pointer;">close</span>
     `;
 
-    // 削除機能
     bm.querySelector('.bookmark-delete').onclick = (e) => {
       e.stopPropagation();
       bookmarks.splice(index, 1);
@@ -282,25 +281,13 @@ function renderBookmarks() {
       renderBookmarks();
     };
 
-    // ナビゲート
     bm.querySelector('.bookmark-title').onclick = () => navigateToURL(url);
-
-    // ドラッグ開始
     bm.addEventListener('dragstart', (e) => {
       e.dataTransfer.setData('text/plain', index.toString());
       bm.classList.add('dragging');
     });
-
-    bm.addEventListener('dragend', () => {
-      bm.classList.remove('dragging');
-    });
-
-    // ドラッグオーバー（許可）
-    bm.addEventListener('dragover', (e) => {
-      e.preventDefault();
-    });
-
-    // ドロップ時の並び替え処理
+    bm.addEventListener('dragend', () => bm.classList.remove('dragging'));
+    bm.addEventListener('dragover', (e) => e.preventDefault());
     bm.addEventListener('drop', (e) => {
       e.preventDefault();
       const fromIndex = parseInt(e.dataTransfer.getData('text/plain'));
@@ -317,7 +304,7 @@ function renderBookmarks() {
   });
 }
 
-  function saveBookmarks(bookmarks) {
+function saveBookmarks(bookmarks) {
   document.cookie = "bookmarks=" + encodeURIComponent(JSON.stringify(bookmarks)) + ";path=/;max-age=31536000";
 }
 
@@ -326,7 +313,7 @@ function loadBookmarks() {
   return match ? JSON.parse(decodeURIComponent(match[1])) : [];
 }
 
- function toggleFullscreen() {
+function toggleFullscreen() {
   const container = document.documentElement;
   if (!document.fullscreenElement) {
     container.requestFullscreen().then(() => {
@@ -337,40 +324,33 @@ function loadBookmarks() {
   }
 }
 
-  const redirectAfter = "https://classroom.google.com/h";
+const redirectAfter = "https://classroom.google.com/h";
 
-  if (localStorage.getItem("popup_initialized") === "yes") {
-    const win = window.open('about:blank', '_blank');
-    if (win) {
-      const doc = win.document;
-      doc.open();
-      doc.write(`<!DOCTYPE html>
-        <html>
-        <head>
-          <title>Google</title>
-          <link rel="icon" href="https://www.google.com/favicon.ico" type="image/x-icon">
-          <style>
-            html, body { margin: 0; height: 100%; background: white; overflow: hidden; }
-            iframe { width: 100vw; height: 100vh; border: none; }
-          </style>
-        </head>
-        <body>
-          <iframe src="browser.html" allowfullscreen></iframe>
-        </body>
-        </html>`);
-      doc.close();
-
-      window.location.href = redirectAfter;
-    } else {
-      alert('ポップアップがブロックされています。Chromeの設定から許可してください。');
-    }
+if (localStorage.getItem("popup_initialized") === "yes") {
+  const win = window.open('about:blank', '_blank');
+  if (win) {
+    fetch('browser.html')
+      .then(res => res.text())
+      .then(html => {
+        win.document.open();
+        win.document.write(html);
+        win.document.close();
+        window.location.href = redirectAfter;
+      })
+      .catch(err => {
+        alert("browser.html の読み込みに失敗しました: " + err);
+      });
   } else {
-    alert("ポップアップを許可してください（初回のみ表示）");
-    localStorage.setItem("popup_initialized", "yes");
+    alert('ポップアップがブロックされています。Chromeの設定から許可してください。');
   }
+} else {
+  alert("ポップアップを許可してください（初回のみ表示）");
+  localStorage.setItem("popup_initialized", "yes");
+}
 
-  window.addEventListener('DOMContentLoaded', () => {
+window.addEventListener('DOMContentLoaded', () => {
   renderBookmarks();
+  newTab();
 });
 
 document.addEventListener('fullscreenchange', () => {
@@ -378,9 +358,6 @@ document.addEventListener('fullscreenchange', () => {
     document.body.classList.remove('fullscreen-mode');
   }
 });
-
-  newTab();
-
 </script>
 </body>
 </html>
