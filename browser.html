@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Google</title>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
+  <link rel="icon" href="https://www.google.com/favicon.ico">
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background: #202124;
+      color: white;
+    }
+    .tabs {
+      display: flex;
+      background: #202124;
+      overflow-x: auto;
+    }
+    .tab {
+      display: flex;
+      align-items: center;
+      background: #303134;
+      border-radius: 6px 6px 0 0;
+      padding: 5px 10px;
+      margin-right: 2px;
+      min-width: 120px;
+      max-width: 200px;
+      flex-shrink: 0;
+      cursor: pointer;
+      user-select: none;
+    }
+    .tab.active {
+      background: #3c4043;
+    }
+    .tab .favicon {
+      width: 16px;
+      height: 16px;
+      margin-right: 5px;
+    }
+    .tab span.title {
+      flex: 1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .tab .close {
+      margin-left: 8px;
+      cursor: pointer;
+      color: #aaa;
+      flex-shrink: 0;
+    }
+    .browser-bar {
+      display: flex;
+      align-items: center;
+      background: #303134;
+      padding: 5px;
+      gap: 5px;
+    }
+    .browser-bar input[type="text"] {
+      flex: 1;
+      padding: 6px;
+      border: none;
+      border-radius: 5px;
+      background: #4a4a4a;
+      color: white;
+    }
+    .iframe-container {
+      height: calc(100vh - 90px);
+    }
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    .material-icons {
+      cursor: pointer;
+      user-select: none;
+    }
+    .bookmark-bar {
+      background: #303134;
+      padding: 4px;
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+    }
+    .bookmark {
+  display: flex;
+  align-items: center;
+  background: #4d5156;
+  padding: 4px 8px;
+  border-radius: 5px;
+  font-size: 13px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+    .bookmark.dragging {
+  opacity: 0.5;
+}
+
+    .fullscreen-mode .tabs,
+.fullscreen-mode .browser-bar,
+.fullscreen-mode .bookmark-bar,
+.fullscreen-mode .tab-add-button {
+  display: none !important;
+}
+
+.fullscreen-mode .iframe-container {
+  height: 100vh;
+}
+
+  </style>
+</head>
+<body>
+  <div class="tabs" id="tabs"></div>
+  <div class="browser-bar" id="browserBar">
+    <span class="material-icons" onclick="goBack()">arrow_back</span>
+    <span class="material-icons" onclick="goForward()">arrow_forward</span>
+    <span class="material-icons" onclick="reloadPage()">refresh</span>
+    <input type="text" id="urlInput" onkeydown="if(event.key==='Enter')navigateToURL(this.value)" />
+    <span class="material-icons" onclick="copyURL()">content_copy</span>
+    <span class="material-icons" onclick="addBookmark()">bookmark_add</span>
+    <span class="material-icons" onclick="toggleFullscreen()">fullscreen</span>
+  </div>
+  <div class="bookmark-bar" id="bookmarkBar"></div>
+  <div class="iframe-container">
+    <iframe id="tabFrame"></iframe>
+  </div>
+  <div style="position: absolute; top: 5px; right: 5px;" class="material-icons tab-add-button" onclick="newTab()">add</div>
+
+<script>
+  let tabs = [];
+  let currentTab = null;
+  const tabsContainer = document.getElementById('tabs');
+  const frame = document.getElementById('tabFrame');
+  const urlInput = document.getElementById('urlInput');
+  const bookmarkBar = document.getElementById('bookmarkBar');
+
+  function newTab(url = 'index.html') {
+    const id = Date.now();
+    const tab = { id, title: '読み込み中...', url };
+    tabs.push(tab);
+    renderTabs();
+    switchTab(id);
+  }
+
+function renderTabs() {
+  tabsContainer.innerHTML = '';
+  tabs.forEach((tab, index) => {
+    const tabEl = document.createElement('div');
+    tabEl.className = 'tab' + (tab.id === currentTab ? ' active' : '');
+    tabEl.draggable = true;
+
+tabEl.innerHTML = `
+  <img class="favicon" src="${tab.favicon || ''}" style="${tab.favicon ? '' : 'display:none;'}" />
+  <span>${tab.title}</span>
+  <span class="close" onclick="closeTab(${tab.id}); event.stopPropagation();">×</span>`;
+
+    // クリックして切り替え
+    tabEl.onclick = () => switchTab(tab.id);
+
+    // ドラッグ開始
+    tabEl.addEventListener('dragstart', (e) => {
+      tabEl.classList.add('dragging');
+      e.dataTransfer.setData('text/plain', index.toString());
+    });
+
+    // ドラッグ終了
+    tabEl.addEventListener('dragend', () => {
+      tabEl.classList.remove('dragging');
+    });
+
+    // ドラッグ先での処理
+    tabEl.addEventListener('dragover', (e) => {
+      e.preventDefault(); // drop を許可
+    });
+
+    tabEl.addEventListener('drop', (e) => {
+      e.preventDefault();
+      const fromIndex = parseInt(e.dataTransfer.getData('text/plain'));
+      const toIndex = index;
+      if (fromIndex !== toIndex) {
+        const movedTab = tabs.splice(fromIndex, 1)[0];
+        tabs.splice(toIndex, 0, movedTab);
+        renderTabs(); // 並び替え後に再描画
+      }
+    });
+
+    tabsContainer.appendChild(tabEl);
+  });
+}
+
+  function switchTab(id) {
+    const tab = tabs.find(t => t.id === id);
+    if (!tab) return;
+    currentTab = id;
+    frame.src = tab.url;
+    urlInput.value = tab.url;
+    renderTabs();
+  }
+
+frame.addEventListener('load', () => {
+  const tab = tabs.find(t => t.id === currentTab);
+  if (!tab) return;
+  try {
+    const doc = frame.contentDocument || frame.contentWindow.document;
+    tab.title = doc.title || tab.url;
+    tab.url = frame.contentWindow.location.href;
+
+    // ファビコン取得（相対URL対応）
+    const iconLink = doc.querySelector("link[rel~='icon']");
+    tab.favicon = iconLink ? new URL(iconLink.getAttribute('href'), tab.url).href : null;
+
+    urlInput.value = tab.url;
+    renderTabs();
+  } catch (e) {
+    // クロスオリジン制限など
+  }
+});
+
+  function closeTab(id) {
+    tabs = tabs.filter(t => t.id !== id);
+    if (currentTab === id && tabs.length) {
+      switchTab(tabs[0].id);
+    } else if (tabs.length === 0) {
+      currentTab = null;
+      frame.src = '';
+      urlInput.value = '';
+    } else {
+      renderTabs();
+    }
+  }
+
+  function navigateToURL(url) {
+    const tab = tabs.find(t => t.id === currentTab);
+    if (tab) {
+      tab.url = url;
+      frame.src = url;
+      renderTabs();
+    }
+  }
+
+  function goBack() { frame.contentWindow.history.back(); }
+  function goForward() { frame.contentWindow.history.forward(); }
+  function reloadPage() { frame.contentWindow.location.reload(); }
+  function copyURL() { navigator.clipboard.writeText(urlInput.value); }
+
+  function addBookmark() {
+  const tab = tabs.find(t => t.id === currentTab);
+  if (tab) {
+    const bookmarks = loadBookmarks();
+    bookmarks.push({ title: tab.title, url: tab.url });
+    saveBookmarks(bookmarks);
+    renderBookmarks();
+    }
+  }
+  
+function renderBookmarks() {
+  bookmarkBar.innerHTML = '';
+  const bookmarks = loadBookmarks();
+
+  bookmarks.forEach(({ title, url }, index) => {
+    const bm = document.createElement('div');
+    bm.className = 'bookmark';
+    bm.draggable = true;
+
+    const faviconUrl = new URL('/favicon.ico', url).href;
+
+    bm.innerHTML = `
+      <img src="${faviconUrl}" style="width:16px;height:16px;margin-right:4px;" onerror="this.style.display='none'">
+      <span class="bookmark-title" style="flex:1;">${title}</span>
+      <span class="material-icons bookmark-delete" style="margin-left:6px;cursor:pointer;">close</span>
+    `;
+
+    // 削除機能
+    bm.querySelector('.bookmark-delete').onclick = (e) => {
+      e.stopPropagation();
+      bookmarks.splice(index, 1);
+      saveBookmarks(bookmarks);
+      renderBookmarks();
+    };
+
+    // ナビゲート
+    bm.querySelector('.bookmark-title').onclick = () => navigateToURL(url);
+
+    // ドラッグ開始
+    bm.addEventListener('dragstart', (e) => {
+      e.dataTransfer.setData('text/plain', index.toString());
+      bm.classList.add('dragging');
+    });
+
+    bm.addEventListener('dragend', () => {
+      bm.classList.remove('dragging');
+    });
+
+    // ドラッグオーバー（許可）
+    bm.addEventListener('dragover', (e) => {
+      e.preventDefault();
+    });
+
+    // ドロップ時の並び替え処理
+    bm.addEventListener('drop', (e) => {
+      e.preventDefault();
+      const fromIndex = parseInt(e.dataTransfer.getData('text/plain'));
+      const toIndex = index;
+      if (fromIndex !== toIndex) {
+        const moved = bookmarks.splice(fromIndex, 1)[0];
+        bookmarks.splice(toIndex, 0, moved);
+        saveBookmarks(bookmarks);
+        renderBookmarks();
+      }
+    });
+
+    bookmarkBar.appendChild(bm);
+  });
+}
+
+  function saveBookmarks(bookmarks) {
+  document.cookie = "bookmarks=" + encodeURIComponent(JSON.stringify(bookmarks)) + ";path=/;max-age=31536000";
+}
+
+function loadBookmarks() {
+  const match = document.cookie.match(/(?:^|; )bookmarks=([^;]*)/);
+  return match ? JSON.parse(decodeURIComponent(match[1])) : [];
+}
+
+ function toggleFullscreen() {
+  const container = document.documentElement;
+  if (!document.fullscreenElement) {
+    container.requestFullscreen().then(() => {
+      document.body.classList.add('fullscreen-mode');
+    });
+  } else {
+    document.exitFullscreen();
+  }
+}
+
+  const redirectAfter = "https://classroom.google.com/h";
+
+  if (localStorage.getItem("popup_initialized") === "yes") {
+    const win = window.open('about:blank', '_blank');
+    if (win) {
+      const doc = win.document;
+      doc.open();
+      doc.write(`<!DOCTYPE html>
+        <html>
+        <head>
+          <title>Google</title>
+          <link rel="icon" href="https://www.google.com/favicon.ico" type="image/x-icon">
+          <style>
+            html, body { margin: 0; height: 100%; background: white; overflow: hidden; }
+            iframe { width: 100vw; height: 100vh; border: none; }
+          </style>
+        </head>
+        <body>
+          <iframe src="https://banana-tube-school.glitch.me/home?initialized=yes" allowfullscreen></iframe>
+        </body>
+        </html>`);
+      doc.close();
+
+      window.location.href = redirectAfter;
+    } else {
+      alert('ポップアップがブロックされています。Chromeの設定から許可してください。');
+    }
+  } else {
+    alert("ポップアップを許可してください（初回のみ表示）");
+    localStorage.setItem("popup_initialized", "yes");
+  }
+
+  window.addEventListener('DOMContentLoaded', () => {
+  renderBookmarks();
+});
+
+document.addEventListener('fullscreenchange', () => {
+  if (!document.fullscreenElement) {
+    document.body.classList.remove('fullscreen-mode');
+  }
+});
+
+  newTab();
+
+</script>
+</body>
+</html>
