@@ -7,16 +7,6 @@
   <meta name="description" content="Jump into the most challenging chapter of the Vex series with Vex 8!..." />
   <link rel="stylesheet" href="styles.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <style>
-    /* フルスクリーン時にiframeが画面いっぱいになるように調整 */
-    iframe:fullscreen,
-    iframe:-webkit-full-screen,
-    iframe:-moz-full-screen {
-      width: 100vw;
-      height: 100vh;
-      border: none;
-    }
-  </style>
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -91,7 +81,16 @@
       <div class="sidebar">
         <div class="other-games">
           <h3>Other Games</h3>
-          <div id="otherGamesList" class="game-grid"></div>
+          <div id="otherGamesList" class="game-grid">
+            <div class="game-card">
+              <img src="image/2048.png" alt="2048">
+              <div class="game-info">
+                <h3>2048</h3>
+                <p>Endless Runner</p>
+                <a href="2048.html" class="play-button">play</a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
