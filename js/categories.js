@@ -1,27 +1,23 @@
 const categories = [
-    { name: "Home", link: "./" },
-    { name: "Action", link: "category.html?category=Action" },
-    { name: "Fighting", link: "category.html?category=Fighting" },
-    { name: "Shooting", link: "category.html?category=Shooting" },
-    { name: "Arcade", link: "category.html?category=Arcade" },
-    { name: "Sports", link: "category.html?category=Sports" },
-    { name: "Puzzle", link: "category.html?category=Puzzle" },
-    { name: "Adventure", link: "category.html?category=Adventure" },
-    { name: "Simulation", link: "category.html?category=Simulation"},
-    { name: "All Games", link: "category.html" },
+    { name: "Home" },
+    { name: "Action" },
+    { name: "Fighting" },
+    { name: "Shooting" },
+    { name: "Arcade" },
+    { name: "Sports" },
+    { name: "Puzzle" },
+    { name: "Adventure" },
+    { name: "Simulation" },
+    { name: "All Games" }
+];
 
-  ];
-  
-  function createCategories() {
+function createCategories() {
     const categoryList = document.getElementById('categoryList');
     categories.forEach(category => {
-      const li = document.createElement('li');
-      const a = document.createElement('a');
-      a.href = category.link;
-      a.textContent = category.name;
-      li.appendChild(a);
-      categoryList.appendChild(li);
+        const li = document.createElement('li');
+        li.textContent = category.name;
+        categoryList.appendChild(li);
     });
-  }
-  
-  document.addEventListener('DOMContentLoaded', createCategories);
+}
+
+document.addEventListener('DOMContentLoaded', createCategories);
