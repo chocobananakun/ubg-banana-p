@@ -4,16 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="83f018de-a780-492d-8a4b-061ff8334239" name="変更" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/2048.html" beforeDir="false" afterPath="$PROJECT_DIR$/2048.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/games.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/games.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/paper.html" beforeDir="false" afterPath="$PROJECT_DIR$/paper.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/slope.html" beforeDir="false" afterPath="$PROJECT_DIR$/slope.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/snow.html" beforeDir="false" afterPath="$PROJECT_DIR$/snow.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/snowrider.html" beforeDir="false" afterPath="$PROJECT_DIR$/snowrider.html" afterDir="false" />
-    </list>
+    <list default="true" id="83f018de-a780-492d-8a4b-061ff8334239" name="変更" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -97,7 +88,7 @@
       <option name="presentableId" value="Default" />
       <updated>1751543998231</updated>
       <workItem from="1751615625535" duration="164000" />
-      <workItem from="1751615806184" duration="639000" />
+      <workItem from="1751615806184" duration="958000" />
     </task>
     <servers />
   </component>

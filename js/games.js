@@ -23,7 +23,7 @@ function createGameCard(game) {
 
 /*renderGames*/
 
-function renderGames() {
+function renderGames(e) {
     const gameGrid = document.getElementById('gameGrid');
     if (!gameGrid) return;
 
@@ -43,7 +43,7 @@ const filteredGames = category
     gameGrid.innerHTML = filteredGames.map(createGameCard).join('');
 }
 
-function renderOtherGames() {
+function renderOtherGames(e) {
     const otherGamesList = document.getElementById('otherGamesList');
     if (!otherGamesList) return;
 
@@ -52,7 +52,7 @@ function renderOtherGames() {
     otherGamesList.innerHTML = otherGames.map(createGameCard).join('');
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', (e) => {
     renderGames();
     renderOtherGames();
 });
