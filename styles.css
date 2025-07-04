@@ -539,3 +539,15 @@ main {
         height: 100vh !important;
     }
 }
+.category-link {
+    color: #000;
+    font-weight: bold;
+    text-decoration: none;
+    margin-right: 15px;
+    transition: color 0.3s ease;
+}
+
+.category-link:hover {
+    color: #0f7ad4;
+    text-decoration: underline;
+}

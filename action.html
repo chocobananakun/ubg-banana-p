@@ -1,23 +1,69 @@
-<!-- action.html -->
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="vi">
 <head>
-    <meta charset="UTF-8" />
-    <title>Action Games</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Action Games - Ubgx88</title>
+    <meta name="description" content="Play free Action Games at Ubgx88. Enjoy fast-paced browser games with no downloads.">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="js/ad-manager.js" defer></script>
+
+    <!-- Google Analytics Tag -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKC7L9377Q"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-EKC7L9377Q');
+    </script>
 </head>
 <body>
-<h2 id="categoryTitle">Action</h2>
-<ul id="categoryList"></ul>
-<div id="gameGrid"></div>
-<hr>
-<h3>おすすめ</h3>
-<div id="otherGamesList"></div>
+<header>
+    <div class="header-content">
+        <div class="logo-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-gamepad"></i>
+                <span>Ubgx88</span>
+            </a>
+        </div>
+        <nav class="main-nav">
+            <ul id="categoryList"></ul>
+        </nav>
+    </div>
+</header>
 
+<main>
+    <h1 id="categoryTitle">Action</h1>
+    <div id="gameGrid" class="game-grid"></div>
+    <hr>
+    <h3>Recommended</h3>
+    <div id="otherGamesList" class="game-grid"></div>
+</main>
+
+<div class="description">
+    <p>Explore our collection of thrilling Action games. From fast-paced shooters to intense battle arenas, there's something for every adrenaline junkie. All games are playable directly in your browser for free.</p>
+</div>
+
+<footer>
+    <div class="footer-content">
+        <div class="footer-links">
+            <a href="about-us.html">About US</a>
+            <a href="terms-of-use.html">Terms Of Use</a>
+            <a href="privacy-policy.html">Privacy Policy</a>
+            <a href="contact.html">Contact</a>
+        </div>
+        <div class="copyright">
+            &copy; 2024 Ubgx88.github.io. Play Unblocked Games.
+        </div>
+    </div>
+</footer>
+
+<!-- Load game rendering scripts -->
 <script src="js/games.js"></script>
 <script src="js/categories.js"></script>
 <script src="js/main.js"></script>
 <script>
-    // カテゴリに絞り込む
     document.addEventListener('DOMContentLoaded', () => {
         renderGames("Action");
     });

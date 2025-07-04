@@ -9,130 +9,100 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="js/ad-manager.js" defer></script>
-	
-	<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7959502586268624"
-     crossorigin="anonymous"></script>
-
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7959502586268624" crossorigin="anonymous"></script>
 </head>
 <body>
-    <header>
-        <div class="header-content">
-            <div class="logo-container">
-                <a href="index.html" class="logo">
-                    <i class="fas fa-gamepad"></i>
-                    <span>Ubg-Banana - Puls - </span>
-                </a>
-            </div>
-            <nav class="main-nav">
-                <ul id="categoryList">
-
-                </ul>
-            </nav>
+<header>
+    <div class="header-content">
+        <div class="logo-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-gamepad"></i>
+                <span>Ubg-Banana - Puls -</span>
+            </a>
         </div>
-    </header>
-	<!-- HTML内に貼り付ける -->
+        <nav class="main-nav">
+            <ul id="categoryList"></ul>
+        </nav>
+    </div>
+</header>
+
+<!-- バナー -->
 <section class="hero-banner">
-  <div class="hero-content">
-    <h1><strong>Unblocked Games</strong></h1>
-    <p>For use at work or school. Let's have fun and play!</p>
-  </div>
+    <div class="hero-content">
+        <h1><strong>Unblocked Games</strong></h1>
+        <p>For use at work or school. Let's have fun and play!</p>
+    </div>
 </section>
 
 <style>
-/* バナーセクション */
-.hero-banner {
-  background-image: url('image/racing-cars-cover.jpg'); /* ←あなたの背景画像URLに変更 */
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  height: 300px; /* 高さは調整可 */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  color: white;
-  position: relative;
-  font-family: 'Segoe UI', sans-serif;
-  box-shadow: inset 0 0 50px rgba(0,0,0,0.4); /* 背景を少し暗くする */
-}
+    .hero-banner {
+        background-image: url('image/racing-cars-cover.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        height: 300px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: white;
+        position: relative;
+        font-family: 'Segoe UI', sans-serif;
+        box-shadow: inset 0 0 50px rgba(0,0,0,0.4);
+    }
 
-/* テキスト */
-.hero-content h1 {
-  font-size: 3rem;
-  font-weight: bold;
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
-  margin-bottom: 10px;
-}
+    .hero-content h1 {
+        font-size: 3rem;
+        font-weight: bold;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+        margin-bottom: 10px;
+    }
 
-.hero-content p {
-  font-size: 1.2rem;
-  text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
-}
+    .hero-content p {
+        font-size: 1.2rem;
+        text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
+    }
 </style>
-    <main>
-        <div class="game-section">
-            <h2>Latest Games</h2>
-            <div class="game-grid" id="gameGrid">
-                <div class="game-card">
-                    <img src="image/slope.png" alt="slope">
-                    <div class="game-info">
-                        <h3>slope</h3>
-                        <p>Endless Runner</p>
-                        <a href="slope.html" class="play-button">play</a>
-                    </div>
-                </div>
-                <div class="game-card">
-                    <img src="image/2048.png" alt="2048">
-                    <div class="game-info">
-                        <h3>2048</h3>
-                        <p>Puzzle</p>
-                        <a href="2048.html" class="play-button">play</a>
-                    </div>
-                </div>
-                <div class="game-card">
-                    <img src="image/paper.png" alt="paper">
-                    <div class="game-info">
-                        <h3>Paper.io 2</h3>
-                        <p>Battle</p>
-                        <a href="paper.html" class="play-button">play</a>
-                    </div>
-                </div>
-                <div class="game-card">
-                    <img src="image/snow.png" alt="snow">
-                    <div class="game-info">
-                        <h3>Snowball.io</h3>
-                        <p>Battle</p>
-                        <a href="snow.html" class="play-button">play</a>
-                    </div>
-                </div>
-                <div class="game-card">
-                    <img src="image/snowrider.png" alt="snowrider">
-                    <div class="game-info">
-                        <h3>SNOWRIDER 3D</h3>
-                        <p>Endless Runner</p>
-                        <a href="snowrider.html" class="play-button">play</a>
-                    </div>
-                </div>
-            </div>
-    </main>
-    <div class="description">
-        <p>Ubg-Bananaは前にあった初代ゲームサイトである。それを改良したものが本サイト、Ubg-Banana - Puls - である。
-        これからもいろいろなゲームを追加していく予定だよー！<strong>楽しんでいってね！</strong></p>
+
+<main>
+    <div class="game-section">
+        <h2 id="categoryTitle">All Games</h2>
+        <div class="game-grid" id="gameGrid"></div>
     </div>
-    <footer>
-        <div class="footer-content">
-            <div class="footer-links">
-                <a href="about-us.html">About ME</a>
-                <a href="terms-of-use.html">Terms Of Use</a>
-                <a href="privacy-policy.html">Privacy Policy</a>
-                <a href="contact.html">Contact</a>
-            </div>
-            <div class="copyright">
-                &copy; 2025 Bananakun.
-            </div>
+</main>
+
+<div class="description">
+    <p>Ubg-Bananaは前にあった初代ゲームサイトである。それを改良したものが本サイト、Ubg-Banana - Puls - である。
+        これからもいろいろなゲームを追加していく予定だよー！<strong>楽しんでいってね！</strong></p>
+</div>
+
+<footer>
+    <div class="footer-content">
+        <div class="footer-links">
+            <a href="about-us.html">About ME</a>
+            <a href="terms-of-use.html">Terms Of Use</a>
+            <a href="privacy-policy.html">Privacy Policy</a>
+            <a href="contact.html">Contact</a>
         </div>
-    </footer>
-    <script src="/js/games.js"></script>
-    <script src="/js/categories.js" defer></script>
+        <div class="copyright">
+            &copy; 2025 Bananakun.
+        </div>
+    </div>
+</footer>
+
+<!-- ↓↓↓ JSファイルは必ず下に置く！ -->
+<script src="js/games.js"></script>
+<script src="js/categories.js"></script>
+<script src="js/main.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        createCategories();
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const selectedCategory = urlParams.get('category');
+        renderGames(selectedCategory); // ← クエリでカテゴリを渡す
+        renderOtherGames();
+    });
+</script>
 </body>
 </html>

@@ -2,14 +2,17 @@ function createCategories() {
     const categoryList = document.getElementById('categoryList');
     if (!categoryList) return;
 
+    categoryList.innerHTML = ''; // 重複防止
+
     categories.forEach(category => {
         const li = document.createElement('li');
         const a = document.createElement('a');
+
+        // クエリパラメータ付きリンクにする
+        a.href = `index.html${category.name === "All Games" ? '' : '?category=' + encodeURIComponent(category.name)}`;
         a.textContent = category.name;
-        a.href = category.link;
-        a.style.marginRight = '10px';
-        a.style.color = 'blue';
-        a.style.textDecoration = 'underline';
+        a.classList.add('category-link');
+
         li.appendChild(a);
         categoryList.appendChild(li);
     });
