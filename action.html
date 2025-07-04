@@ -1,0 +1,26 @@
+<!-- action.html -->
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8" />
+    <title>Action Games</title>
+</head>
+<body>
+<h2 id="categoryTitle">Action</h2>
+<ul id="categoryList"></ul>
+<div id="gameGrid"></div>
+<hr>
+<h3>おすすめ</h3>
+<div id="otherGamesList"></div>
+
+<script src="js/games.js"></script>
+<script src="js/categories.js"></script>
+<script src="js/main.js"></script>
+<script>
+    // カテゴリに絞り込む
+    document.addEventListener('DOMContentLoaded', () => {
+        renderGames("Action");
+    });
+</script>
+</body>
+</html>

@@ -1,24 +1,7 @@
 const categories = [
-    { name: "Home" },
-    { name: "Action" },
-    { name: "Fighting" },
-    { name: "Shooting" },
-    { name: "Arcade" },
-    { name: "Sports" },
-    { name: "Puzzle" },
-    { name: "Adventure" },
-    { name: "Simulation" },
-    { name: "Battle" },
-    { name: "All Games" }
+    { name: "All Games", link: "index.html" },
+    { name: "Action", link: "action.html" },
+    { name: "Arcade", link: "arcade.html" },
+    { name: "Puzzle", link: "puzzle.html" },
+    { name: "Battle", link: "battle.html" },
 ];
-
-function createCategories() {
-    const categoryList = document.getElementById('categoryList');
-    categories.forEach(category => {
-        const li = document.createElement('li');
-        li.textContent = category.name;
-        categoryList.appendChild(li);
-    });
-}
-
-document.addEventListener('DOMContentLoaded', createCategories);
