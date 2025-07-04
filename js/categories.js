@@ -8,6 +8,7 @@ const categories = [
     { name: "Puzzle" },
     { name: "Adventure" },
     { name: "Simulation" },
+    { name: "Battle" },
     { name: "All Games" }
 ];
 
