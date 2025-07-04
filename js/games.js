@@ -1,9 +1,9 @@
 const games = [
-    { name: "Vex 8", image: "image/vex-8.png", description: "Endless Runner", link: "/vex-8.html", category: "Arcade,Action" },
+    { name: "Snowball.io", image: "image/snow.png", description: "Battle", link: "/snow.html", category: "Action" },
     { name: "Slope", image: "image/slope.png", description: "Endless Runner", link: "/slope.html", category: "Arcade,Action" },
     { name: "Paper.io 2", image: "image/paper.png", description: "Battle", link: "/paper.html", category: "Action" },
     { name: "Run 3", image: "image/run3.jpg", description: "Action", link: "/run-3.html", category: "Action" },
-    { name: "Pac-man", image: "image/pac-man.png", description: "Arcade", link: "/pac-man.html", category: "Arcade" },
+    { name: "SNOWRIDER 3D", image: "image/snowrider.png", description: "Endless Runner", link: "/snowrider.html", category: "Action" },
     { name: "2048", image: "image/2048.png", description: "Puzzle", link: "pages/2048.html", category: "Puzzle" },
     { name: "Fireboy And Watergirl 1", image: "image/fireboy-and-watergirl-1.jfif", description: "Puzzle", link: "/Fireboy-And-Watergirl-1.html", category: "Puzzle,Adventure" },
     { name: "Vex X3M 2", image: "image/vex-x3m-2.jpg", description: "Adventure", link: "/vex-x3m-2.html", category: "Action,Adventure" },
