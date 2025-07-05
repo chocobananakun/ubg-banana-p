@@ -4,16 +4,16 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Slope - Ubg-Banana+</title>
-  <link rel="icon" href="favicon.png" type="image/png">
+  <link rel="icon" href="../favicon.png" type="image/png">
   <meta name="description" content="Jump into the most challenging chapter of the Vex series with Vex 8!..." />
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="../styles.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 </head>
 <body>
 <header>
   <div class="header-content">
     <div class="logo-container">
-      <a href="index.html" class="logo">
+      <a href="../index.html" class="logo">
         <i class="fas fa-gamepad"></i>
         <span>Ubg-Banana - Puls -</span>
       </a>
@@ -32,13 +32,13 @@
           <iframe
                   id="gameFrame"
                   class="game-frame"
-                  src="games/main/slope_main.html"
+                  src="../games/main/slope_main.html"
                   frameborder="0"
                   allowfullscreen
           ></iframe>
         </div>
         <div class="fullscreen-controls">
-          <a class="fullscreen-button" href="#">
+          <a class="fullscreen-button" href="../games/main/slope_main.html">
             <i class="fas fa-expand"></i> Fullscreen
           </a>
         </div>
@@ -90,46 +90,12 @@
   </div>
 </footer>
 
-<!-- Fullscreen script -->
-<script>
-  document.querySelector('.fullscreen-button').addEventListener('click', function (e) {
-    e.preventDefault();
-    const gameFrame = document.getElementById('gameFrame');
-    if (!document.fullscreenElement) {
-      if (gameFrame.requestFullscreen) {
-        gameFrame.requestFullscreen();
-      } else if (gameFrame.webkitRequestFullscreen) {
-        gameFrame.webkitRequestFullscreen();
-      } else if (gameFrame.msRequestFullscreen) {
-        gameFrame.msRequestFullscreen();
-      }
-      this.innerHTML = '<i class="fas fa-compress"></i> Exit Fullscreen';
-    } else {
-      if (document.exitFullscreen) {
-        document.exitFullscreen();
-      } else if (document.webkitExitFullscreen) {
-        document.webkitExitFullscreen();
-      } else if (document.msExitFullscreen) {
-        document.msExitFullscreen();
-      }
-      this.innerHTML = '<i class="fas fa-expand"></i> Fullscreen';
-    }
-  });
-
-  document.addEventListener('fullscreenchange', function () {
-    const button = document.querySelector('.fullscreen-button');
-    if (!document.fullscreenElement) {
-      button.innerHTML = '<i class="fas fa-expand"></i> Fullscreen';
-    }
-  });
-</script>
-
 <!-- 共通JS -->
-<script src="js/categories.js" defer></script>
-<script src="js/games.js" defer></script>
-<script src="js/main.js" defer></script>
+<script src="../js/categories.js" defer></script>
+<script src="../js/games.js" defer></script>
+<script src="../js/main.js" defer></script>
 
-<!-- このページではカテゴリだけ生成＆他のゲームだけ表示 -->
+<!-- カテゴリと他のゲームを表示 -->
 <script>
   document.addEventListener('DOMContentLoaded', () => {
     if (typeof createCategories === 'function') {

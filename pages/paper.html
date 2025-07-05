@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paper.io 2 - Ubg-Banana+</title>
+    <link rel="icon" href="../favicon.png" type="image/png">
+    <meta name="description" content="2048 is a single-player sliding block puzzle game. ...">
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="../js/ad-manager.js" defer></script>
+</head>
+<body>
+<header>
+    <div class="header-content">
+        <div class="logo-container">
+            <a href="../index.html" class="logo">
+                <i class="fas fa-gamepad"></i>
+                <span>Ubg-Banana - Puls -</span>
+            </a>
+        </div>
+        <nav class="main-nav">
+            <ul id="categoryList"></ul>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <div class="content-wrapper">
+        <div class="game-and-info">
+            <div class="game-container">
+                <div class="game-wrapper">
+                    <iframe id="gameFrame" class="game-frame" src="../games/main/paper_main.html" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <div class="fullscreen-controls">
+                    <button class="fullscreen-button">
+                        <i class="fas fa-expand"></i>
+                        Fullscreen
+                    </button>
+                </div>
+            </div>
+
+            <div class="game-info">
+                <h2>Paper.io 2 Unblocked</h2>
+                <div class="game-description">
+                    <p>とにかく陣地を増やす！より広いほうが勝ち！領土の奪い合いだー！</p>
+                </div>
+                <div class="game-features">
+                    <p>Core Features</p>
+                    <ul>
+                        <li>50+ challenging levels</li>
+                        <li>Enhanced ragdoll physics</li>
+                        <li>Wall-jumping mechanics</li>
+                        <li>Underwater segments</li>
+                        <li>Custom level editor</li>
+                        <li>Free to play</li>
+                    </ul>
+                </div>
+                <h3>How To Play</h3>
+                <div class="game-controls">
+                    <p>Use arrows,WASD,Use mouse</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="sidebar">
+            <div class="other-games">
+                <h3>Other Games</h3>
+                <div id="otherGamesList" class="game-grid"></div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer>
+    <div class="footer-content">
+        <div class="footer-links">
+            <a href="about-us.html">About US</a>
+            <a href="terms-of-use.html">Terms Of Use</a>
+            <a href="privacy-policy.html">Privacy Policy</a>
+            <a href="contact.html">Contact</a>
+        </div>
+        <div class="copyright">
+            &copy; 2025 Bananakun.
+        </div>
+    </div>
+</footer>
+
+<!-- Fullscreen JS -->
+<script>
+    document.querySelector('.fullscreen-button').addEventListener('click', function () {
+        const gameWrapper = document.querySelector('.game-wrapper');
+        if (!document.fullscreenElement) {
+            if (gameWrapper.requestFullscreen) gameWrapper.requestFullscreen();
+            else if (gameWrapper.webkitRequestFullscreen) gameWrapper.webkitRequestFullscreen();
+            else if (gameWrapper.msRequestFullscreen) gameWrapper.msRequestFullscreen();
+            this.innerHTML = '<i class="fas fa-compress"></i> Exit Fullscreen';
+        } else {
+            if (document.exitFullscreen) document.exitFullscreen();
+            else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+            else if (document.msExitFullscreen) document.msExitFullscreen();
+            this.innerHTML = '<i class="fas fa-expand"></i> Fullscreen';
+        }
+    });
+
+    document.addEventListener('fullscreenchange', function () {
+        const button = document.querySelector('.fullscreen-button');
+        if (!document.fullscreenElement) {
+            button.innerHTML = '<i class="fas fa-expand"></i> Fullscreen';
+        }
+    });
+</script>
+
+<!-- 共通JSファイル -->
+<script src="../js/categories.js" defer></script>
+<script src="../js/games.js" defer></script>
+<script src="../js/main.js" defer></script>
+
+<!-- 必要な関数だけ呼び出し -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        if (typeof createCategories === 'function') createCategories();
+        if (typeof renderOtherGames === 'function') renderOtherGames();
+    });
+</script>
+</body>
+</html>
