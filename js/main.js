@@ -63,13 +63,14 @@ function renderOtherGames() {
 
     const basePath = getBasePath();
 
-    const shuffledGames = [...games].sort(() => 0.5 - Math.random());
+    const currentGameName = document.body.dataset.gameName;
+    console.log("現在のゲーム名:", currentGameName);
+
+    const filteredGames = games.filter(game => game.name !== currentGameName);
+    console.log("フィルター後のゲーム数:", filteredGames.length);
+
+    const shuffledGames = [...filteredGames].sort(() => 0.5 - Math.random());
     const otherGames = shuffledGames.slice(0, 4);
+
     otherGamesList.innerHTML = otherGames.map(game => createGameCard(game, basePath)).join('');
 }
-
-document.addEventListener('DOMContentLoaded', () => {
-    createCategories();
-    renderGames(); // 初期表示：全ゲーム
-    renderOtherGames();
-});
