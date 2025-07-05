@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="83f018de-a780-492d-8a4b-061ff8334239" name="変更" comment="" />
+    <list default="true" id="83f018de-a780-492d-8a4b-061ff8334239" name="変更" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -38,6 +40,7 @@
   "keyToString": {
     "DefaultHtmlFileTemplate": "HTML File",
     "JavaScript デバッグ.index.html.executor": "Run",
+    "JavaScript デバッグ.snowrider.html.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "gh-pages",
@@ -60,12 +63,6 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="ubg-banana-puls-" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
       <module name="ubg-banana-puls-" />
       <option name="filePath" />
@@ -92,6 +89,7 @@
       <updated>1751543998231</updated>
       <workItem from="1751615625535" duration="164000" />
       <workItem from="1751615806184" duration="7361000" />
+      <workItem from="1751678991936" duration="127000" />
     </task>
     <servers />
   </component>
