@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>ageofwar2</title>
+    <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            background-color: black;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #flash-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+    </style>
+</head>
+<body>
+<div id="flash-container"></div>
+
+<script>
+    window.RufflePlayer = window.RufflePlayer || {};
+    window.addEventListener("load", () => {
+        const ruffle = window.RufflePlayer.newest();
+        const container = document.getElementById("flash-container");
+        const player = ruffle.createPlayer();
+
+        // 高さは画面いっぱいに、幅は4:3比率で計算
+        player.style.height = "100vh"; // 画面の高さいっぱい
+        player.style.width = "133.33vh"; // 4:3比率に対応（= 4 / 3 * 100）
+
+        player.style.maxWidth = "100vw"; // 横スクロール防止
+        player.style.maxHeight = "100vh";
+
+        container.appendChild(player);
+
+        player.load("https://cdn.glitch.global/436e3b86-b057-4572-abd0-9a8ee5f4a692/age-of-war-2.swf?v=1751889692152");
+    });
+</script>
+</body>
+</html>

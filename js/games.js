@@ -4,4 +4,12 @@ const games = [
     { name: "Paper.io 2", image: "image/paper.png", description: "Battle", link: "paper.html", category: "Battle,Action" },
     { name: "SNOWRIDER 3D", image: "image/snowrider.png", description: "Endless Runner", link: "snowrider.html", category: "Action" },
     { name: "2048", image: "image/2048.png", description: "Puzzle", link: "2048.html", category: "Puzzle" },
+    { name: "Age Of War", image: "image/aow.png", description: "Battle", link: "aow.html", category: "Arcade,Battle" },
+    { name: "Age Of War 2", image: "image/aow2.png", description: "Battle", link: "aow2.html", category: "Arcade,Battle" },
+    { name: "Happy Wheels", image: "image/hw.png", description: "Chaos", link: "hw.html", category: "Action" },
+    { name: "Minecraft 1.8.8", image: "image/1.8.8.png", description: "minecraft", link: "1.8.8.html", category: "Action,Arcade" },
+    { name: "Minecraft 1.12.2", image: "image/1.12.2.png", description: "minecraft", link: "1.12.2.html", category: "Action,Arcade" },
+    { name: "Bloxorz", image: "image/bloxorz.png", description: "Use brain", link: "bloxorz.html", category: "Arcade,Puzzle" },
+    { name: "Portal", image: "image/portal.png", description: "Use brain", link: "portal.html", category: "Arcade,Puzzle" },
+    { name: "Super Mario 64", image: "image/mario64.png", description: "Action!", link: "mario64.html", category: "Action" },
 ];

@@ -5,7 +5,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="83f018de-a780-492d-8a4b-061ff8334239" name="変更" comment="">
+      <change afterPath="$PROJECT_DIR$/games/main/aow2_main.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/games/main/aow_main.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/games/main/bloxorz_main.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/games/main/hw_main.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/games/main/portal_main.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/1.12.2.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/1.8.8.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/aow.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/aow2.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/bloxorz.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/hw.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/mario64.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/portal.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/games/swf/Happy Wheels.swf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/games/swf/age_of_war.swf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/games/swf/bloxorz.swf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/games.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/games.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,25 +53,30 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;JavaScript デバッグ.index.html.executor&quot;: &quot;Run&quot;,
-    &quot;JavaScript デバッグ.snowrider.html.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;gh-pages&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "JavaScript デバッグ.index.html.executor": "Run",
+    "JavaScript デバッグ.snowrider.html.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "gh-pages",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/github_desktop/ubg-banana-puls-/pages",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\github_desktop\ubg-banana-puls-\pages" />
+      <recent name="C:\github_desktop\ubg-banana-puls-\games\main" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\github_desktop\ubg-banana-puls-\pages" />
       <recent name="C:\github_desktop\ubg-banana-puls-\" />
@@ -63,12 +85,6 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="ubg-banana-puls-" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
       <module name="ubg-banana-puls-" />
       <option name="filePath" />
@@ -98,6 +114,7 @@
       <workItem from="1751678991936" duration="127000" />
       <workItem from="1751679140051" duration="6096000" />
       <workItem from="1751762559905" duration="1531000" />
+      <workItem from="1751888610699" duration="4646000" />
     </task>
     <servers />
   </component>
