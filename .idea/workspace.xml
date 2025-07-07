@@ -63,6 +63,12 @@
     </key>
   </component>
   <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="ubg-banana-puls-" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
       <module name="ubg-banana-puls-" />
       <option name="filePath" />
@@ -91,6 +97,7 @@
       <workItem from="1751615806184" duration="7361000" />
       <workItem from="1751678991936" duration="127000" />
       <workItem from="1751679140051" duration="6096000" />
+      <workItem from="1751762559905" duration="1531000" />
     </task>
     <servers />
   </component>
