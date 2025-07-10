@@ -12,4 +12,5 @@ const games = [
     { name: "Bloxorz", image: "image/bloxorz.png", description: "Use brain", link: "bloxorz.html", category: "Arcade,Puzzle" },
     { name: "Portal", image: "image/portal.png", description: "Use brain", link: "portal.html", category: "Arcade,Puzzle" },
     { name: "Super Mario 64", image: "image/mario64.png", description: "Action!", link: "mario64.html", category: "Action" },
+    { name: "dino", image: "image/dino.png", description: "minigame", link: "dino.html", category: "Action,Arcade" },
 ];
