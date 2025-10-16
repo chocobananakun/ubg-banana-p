@@ -13,4 +13,5 @@ const games = [
     { name: "Portal", image: "image/portal.png", description: "Use brain", link: "portal.html", category: "Arcade,Puzzle" },
     { name: "Super Mario 64", image: "image/mario64.png", description: "Action!", link: "mario64.html", category: "Action" },
     { name: "dino", image: "image/dino.png", description: "minigame", link: "dino.html", category: "Action,Arcade" },
+    { name: "Cookie Clicker", image: "image/cookie.png", description: "Chaos", link: "games/main/cookieclicker-gh-pages/index.html", category: "Action,Arcade" },
 ];
