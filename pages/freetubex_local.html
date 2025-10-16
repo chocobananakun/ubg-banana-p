@@ -1,0 +1,728 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>FreeTubeX Fronted — ローカル版</title>
+  <link rel="icon" type="image/png" href="https://i.imgur.com/v36ao2Q.png"/>
+  <style>
+    :root{
+      --green-900: #1b5e20;
+      --green-700: #2e7d32;
+      --green-500: #66bb6a;
+      --bg: #ffffff;
+      --surface: #f6f6f6;
+      --text: #222;
+      --muted: #888;
+      --accent: var(--green-700);
+      --transition: 0.27s cubic-bezier(.37,1.14,.43,1.01);
+    }
+    [data-theme="dark"]{
+      --bg: #22252a;
+      --surface: #2d3037;
+      --text: #e6e6e6;
+      --muted: #b0b4be;
+      --accent: #388e3c;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Hiragino Kaku Gothic ProN',Meiryo,sans-serif;background:var(--bg);color:var(--text);transition:background var(--transition),color var(--transition)}
+    header{height:64px;display:flex;align-items:center;gap:12px;padding:8px 16px;background:var(--surface);border-bottom:1px solid rgba(0,0,0,.06);transition:background var(--transition),color var(--transition)}
+    .logo{display:flex;align-items:center;gap:10px;font-weight:700}
+    .logo .mark{width:44px;height:44px;border-radius:6px;background:linear-gradient(135deg,var(--green-700),var(--green-500));display:flex;align-items:center;justify-content:center;color:white;font-weight:800;transition:background var(--transition)}
+    .search-wrap{flex:1;display:flex;align-items:center;gap:8px}
+    input[type="text"].url-input{flex:1;padding:10px 12px;border-radius:6px;border:1px solid rgba(0,0,0,.08);background:transparent;color:var(--text);transition:background var(--transition),color var(--transition);}
+    button.btn{background:var(--accent);border:none;color:white;padding:10px 12px;border-radius:6px;cursor:pointer;transition:background var(--transition);}
+    .controls{display:flex;gap:8px;align-items:center}
+    .container{display:grid;grid-template-columns:240px 1fr;gap:18px;padding:18px;transition:background var(--transition)}
+    .sidebar{background:var(--surface);padding:12px;border-radius:10px;min-height:300px;transition:background var(--transition)}
+    .main{display:flex;flex-direction:column;gap:12px}
+    .player-wrap{background:var(--surface);padding:12px;border-radius:10px;min-height:260px;display:flex;flex-direction:column;transition:background var(--transition)}
+    .player-header{display:flex;justify-content:space-between;align-items:center;gap:8px}
+    .iframe-box{width:100%;aspect-ratio:16/9;border-radius:8px;overflow:hidden;background:#000;transition:background var(--transition)}
+    iframe{width:100%;height:100%;border:0;display:block}
+    .list-item-vertical {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 10px 6px;
+      gap: 7px;
+      min-height: 150px;
+      transition: box-shadow var(--transition),transform var(--transition);
+      box-shadow: 0 0 0 rgba(0,0,0,0);
+    }
+    .list-item-vertical.dragging {
+      box-shadow: 0 8px 30px rgba(46,125,50,0.17);
+      transform: scale(1.05);
+      z-index: 10;
+    }
+    .list-item-vertical.over {
+      box-shadow: 0 2px 16px rgba(46,125,50,0.09);
+      background: rgba(102,187,106,.09);
+    }
+    .thumbnail-large {
+      width: 100%;
+      max-width: 168px;
+      aspect-ratio: 16/9;
+      border-radius: 8px;
+      background: #eee;
+      object-fit: cover;
+      display: block;
+      margin: 0 auto;
+      border: 1.5px solid #bbb;
+      transition: box-shadow var(--transition);
+    }
+    .item-main-text {
+      margin: 6px 0 0 0;
+      font-size: 15px;
+      font-weight: 500;
+      text-align: center;
+      word-break: break-all;
+      width: 100%;
+      color: var(--text);
+    }
+    .item-main-nickname {
+      margin: 6px 0 0 0;
+      font-size: 15px;
+      font-weight: 600;
+      text-align: center;
+      word-break: break-all;
+      width: 100%;
+      line-height: 1.35;
+      color: var(--text);
+    }
+    .item-btn-row {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      width: 100%;
+      margin-top: 7px;
+    }
+    .item-btn-row button {
+      width: 32px;
+      height: 32px;
+      font-size: 18px;
+      border-radius: 7px;
+      padding: 0;
+      min-width: 0;
+      min-height: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background var(--transition),box-shadow var(--transition);
+    }
+    .list-item-id{font-size:11px;color:var(--muted);word-break:break-all;}
+    .muted{color:var(--muted)}
+    .footer-small{font-size:12px;color:var(--muted);margin-top:8px}
+    .code-box{background:#0f1720;color:#dfeef0;padding:12px;border-radius:8px;font-family:monospace;white-space:pre-wrap;transition:background var(--transition),color var(--transition);}
+    .favs-io-row {
+      display: flex;
+      gap: 4px;
+      align-items: center;
+    }
+    .favs-mini-btn {
+      font-size: 12px !important;
+      padding: 2px 8px !important;
+      height: 24px !important;
+      line-height: 1 !important;
+      border-radius: 4px !important;
+      min-width: 0 !important;
+      min-height: 0 !important;
+    }
+    @media (max-width:900px){
+      .container{grid-template-columns:1fr}
+      .sidebar{order:2}
+      .main{order:1}
+      .list-item-vertical { max-width: 100%; }
+    }
+    .ghost {
+      background: rgba(102, 187, 106, 0.12);
+      border: 1px solid rgba(46, 125, 50, 0.16);
+      padding: 8px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      color: var(--text);
+      transition: background var(--transition);
+    }
+    [data-theme="dark"] .ghost {
+      background: rgba(46, 125, 50, 0.25);
+      border: 1px solid rgba(102, 187, 106, 0.22);
+    }
+    .ghost:hover {
+      background: rgba(102, 187, 106, 0.25);
+    }
+    [data-theme="dark"] .ghost:hover {
+      background: rgba(46, 125, 50, 0.38);
+    }
+    .icon-btn{width:36px;height:36px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;transition:background var(--transition)}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <div class="mark">
+        <img src="https://i.imgur.com/v36ao2Q.png" 
+             alt="FreeTubeX Logo" 
+             style="width:100%;height:100%;object-fit:contain;border-radius:6px;">
+      </div>
+      <div>
+        <div>FreeTubeX</div>
+        <div style="font-size:12px;color:var(--muted)">Local Fronted</div>
+      </div>
+    </div>
+    <div class="search-wrap">
+      <input id="urlInput" class="url-input" placeholder="YouTubeのURLを貼り付けまたは検索... (例: https://youtu.be/xxxx)" />
+      <div class="controls">
+        <button id="playBtn" class="btn">再生</button>
+        <button id="generateBtn" class="ghost">iframe生成</button>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:8px">
+      <button id="themeToggle" class="icon-btn" title="テーマ切替">🌗</button>
+    </div>
+  </header>
+  <main class="container">
+    <aside class="sidebar">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <div style="font-weight:700">履歴</div>
+        <div class="small">
+          <button id="clearHistory" class="ghost">クリア</button>
+        </div>
+      </div>
+      <div id="historyList" class="list"></div>
+      <hr style="margin:12px 0;border:none;border-top:1px solid rgba(0,0,0,.04)" />
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <div style="font-weight:700">お気に入り</div>
+        <div class="small favs-io-row">
+          <button id="exportFavs" class="ghost favs-mini-btn">出力</button>
+          <button id="importFavs" class="ghost favs-mini-btn">インポート</button>
+          <input type="file" id="importFavsFile" accept=".json" style="display:none">
+        </div>
+      </div>
+      <div id="favList" class="list"></div>
+      <div class="footer-small">Local storageに保存されます。エクスポート/インポートでバックアップ可能。</div>
+    </aside>
+    <section class="main">
+      <div class="player-wrap">
+        <div class="player-header">
+          <div style="font-weight:700">プレイヤー</div>
+          <div class="row">
+            <button id="favBtn" class="ghost">☆ お気に入り</button>
+            <button id="openBtn" class="ghost">新しいタブで開く</button>
+          </div>
+        </div>
+        <div style="margin-top:10px;">
+          <div class="options">
+            <label class="option"><input id="optAutoplay" type="checkbox" /> 自動再生</label>
+            <label class="option"><input id="optLoop" type="checkbox" /> ループ</label>
+            <label class="option"><input id="optControls" type="checkbox" checked /> コントロール</label>
+            <label class="option">開始時間 <input id="optStart" type="number" min="0" value="0" style="width:80px;padding:6px;border-radius:6px;border:1px solid rgba(0,0,0,.06)" /> 秒</label>
+          </div>
+        </div>
+        <div style="margin-top:12px;">
+          <div class="iframe-box" id="iframeBox" style="flex:1">
+            <!-- iframe がここに入る -->
+            <div id="placeholder" style="display:flex;align-items:center;justify-content:center;color:var(--muted);height:100%">ここに動画が表示されます</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:8px;margin-top:12px;align-items:center">
+          <button id="copyUrl" class="btn">URLコピー</button>
+          <button id="copyIframe" class="btn">iframeをコピー</button>
+          <button id="downloadHtml" class="ghost">ページをHTMLで保存</button>
+        </div>
+      </div>
+      <div>
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div style="font-weight:700">iframeコード / 変換URL</div>
+          <div class="small">ワンクリックでコピーできます</div>
+        </div>
+        <div id="codeOutput" class="code-box" contenteditable="false">ここにiframeタグと動画URLが表示されます</div>
+        <div style="display:flex;gap:8px;margin-top:8px;align-items:center">
+          <button id="clearAll" class="ghost">全データ消去</button>
+        </div>
+      </div>
+    </section>
+  </main>
+  <script>
+    // ---------- ユーティリティ ----------
+    const $ = sel => document.querySelector(sel);
+
+    // localStorage keys
+    const KEY_HISTORY = 'freetubex_history_v1';
+    const KEY_FAV = 'freetubex_favs_v1';
+    const KEY_THEME = 'freetubex_theme_v1';
+
+    // Elements
+    const urlInput = $('#urlInput');
+    const playBtn = $('#playBtn');
+    const generateBtn = $('#generateBtn');
+    const iframeBox = $('#iframeBox');
+    const placeholder = $('#placeholder');
+    const codeOutput = $('#codeOutput');
+    const copyUrl = $('#copyUrl');
+    const copyIframe = $('#copyIframe');
+    const optAutoplay = $('#optAutoplay');
+    const optLoop = $('#optLoop');
+    const optControls = $('#optControls');
+    const optStart = $('#optStart');
+    const historyList = $('#historyList');
+    const favList = $('#favList');
+    const favBtn = $('#favBtn');
+    const openBtn = $('#openBtn');
+    const clearHistory = $('#clearHistory');
+    const clearAll = $('#clearAll');
+    const themeToggle = $('#themeToggle');
+    const exportFavs = $('#exportFavs');
+    const importFavs = $('#importFavs');
+    const importFavsFile = $('#importFavsFile');
+    const downloadHtml = $('#downloadHtml');
+
+    // state
+    let current = { original: '', nocookie: '', id: '', title: '', type: 'video', listId: '' };
+    let history = loadJSON(KEY_HISTORY) || [];
+    let favs = loadJSON(KEY_FAV) || [];
+
+    function parseYouTubeUrl(url){
+      try{
+        url = url.trim();
+        if(!url) return null;
+        if(/^PL[a-zA-Z0-9-_]{16,}$/.test(url)) {
+          return { type: 'playlist', listId: url, id: '', params: {} };
+        }
+        const vidRegex = /^[a-zA-Z0-9_-]{11}$/;
+        if(vidRegex.test(url)) return { type: 'video', id: url, params: {} };
+
+        if(!/^https?:\/\//i.test(url)) url = 'https://' + url;
+        const u = new URL(url);
+
+        if(u.hostname.includes('youtu.be')){
+          const id = u.pathname.split('/').filter(Boolean)[0];
+          const params = Object.fromEntries(u.searchParams.entries());
+          if(params.list) return { type: 'playlist', listId: params.list, id, params };
+          return { type: 'video', id, params };
+        }
+
+        if(u.hostname.includes('youtube.com') || u.hostname.includes('youtube-nocookie.com')){
+          const params = Object.fromEntries(u.searchParams.entries());
+          if(u.pathname.startsWith('/playlist') && params.list){
+            return { type: 'playlist', listId: params.list, id: '', params };
+          }
+          if(u.pathname.startsWith('/watch')){
+            if(params.list && params.v){
+              return { type: 'playlist', listId: params.list, id: params.v, params };
+            }
+            if(params.v) return { type: 'video', id: params.v, params };
+          }
+          const parts = u.pathname.split('/').filter(Boolean);
+          const embedIndex = parts.indexOf('embed');
+          if(embedIndex !== -1 && parts[embedIndex+1]){
+            if(params.list) return { type: 'playlist', listId: params.list, id: parts[embedIndex+1], params };
+            return { type: 'video', id: parts[embedIndex+1], params };
+          }
+          if(parts[0] === 'shorts' && parts[1]){
+            return { type: 'video', id: parts[1], params };
+          }
+        }
+        if(url.includes('list=PL')){
+          const m = url.match(/list=(PL[a-zA-Z0-9-_]+)/);
+          if(m) return { type: 'playlist', listId: m[1], id: '', params: {} };
+        }
+        return null;
+      }catch(e){
+        return null;
+      }
+    }
+
+    function makeNoCookieUrl(id, params={}, type='video', listId=''){
+      if(type === 'playlist' && listId){
+        let base = 'https://www.youtube-nocookie.com/embed';
+        if(id) base += '/' + encodeURIComponent(id);
+        const sp = new URLSearchParams();
+        sp.set('listType','playlist');
+        sp.set('list', listId);
+        if(optAutoplay.checked) sp.set('autoplay','1');
+        if(!optControls.checked) sp.set('controls','0');
+        if(optLoop.checked) sp.set('loop','1');
+        const start = parseInt(optStart.value) || 0;
+        if(start > 0) sp.set('start', String(start));
+        const qs = sp.toString();
+        return base + (qs ? '?' + qs : '');
+      }else if(type === 'video' && id){
+        const base = 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(id);
+        const sp = new URLSearchParams();
+        if(params.list) sp.set('list', params.list);
+        if(optAutoplay.checked) sp.set('autoplay','1');
+        if(!optControls.checked) sp.set('controls','0');
+        if(optLoop.checked){
+          sp.set('loop','1');
+          sp.set('playlist', id);
+        }
+        const start = parseInt(optStart.value) || 0;
+        if(start > 0) sp.set('start', String(start));
+        const qs = sp.toString();
+        return qs ? (base + '?' + qs) : base;
+      }
+      return '';
+    }
+
+    function getThumbnailUrl(type, id, listId){
+      if(type === 'video' && id){
+        return `https://img.youtube.com/vi/${id}/hqdefault.jpg`;
+      }
+      return '';
+    }
+
+    function updatePlayer(){
+      const raw = urlInput.value.trim();
+      const parsed = parseYouTubeUrl(raw);
+      if(!parsed){
+        alert('有効なYouTube URL/ID/プレイリストIDを入力してください');
+        return;
+      }
+      const nocookie = makeNoCookieUrl(parsed.id, parsed.params, parsed.type, parsed.listId);
+      current = { 
+        original: raw, 
+        nocookie, 
+        id: parsed.id || '', 
+        type: parsed.type, 
+        listId: parsed.listId || '', 
+        params: parsed.params 
+      };
+      renderIframe(nocookie);
+      generateCodeOutput();
+      addHistory(current);
+      updateFavButton();
+    }
+
+    function renderIframe(src){
+      iframeBox.innerHTML = '';
+      const ifr = document.createElement('iframe');
+      ifr.src = src;
+      ifr.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+      ifr.setAttribute('allowfullscreen','');
+      iframeBox.appendChild(ifr);
+      placeholder.style.display = 'none';
+    }
+
+    function generateCodeOutput(){
+      const urlText = current.nocookie || '';
+      const iframeCode = urlText
+        ? `<iframe src="${urlText}" width="560" height="315" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`
+        : '';
+      codeOutput.textContent = urlText + '\n\n' + iframeCode;
+    }
+
+    function addHistory(item){
+      history = history.filter(h => !(h.id===item.id && h.type===item.type && h.listId===item.listId));
+      history.unshift({
+        id:item.id, 
+        original:item.original, 
+        nocookie:item.nocookie, 
+        type: item.type, 
+        listId: item.listId, 
+        ts:Date.now()
+      });
+      if(history.length>50) history.pop();
+      saveJSON(KEY_HISTORY, history);
+      renderHistory();
+    }
+
+    function updateFavButton(){
+      const exists = favs.find(f=>f.id===current.id && f.type===current.type && f.listId===current.listId);
+      favBtn.textContent = exists ? '★ お気に入り解除' : '☆ お気に入り';
+    }
+
+    function renderHistory(){
+      historyList.innerHTML = '';
+      if(history.length===0){ historyList.innerHTML = '<div class="muted small">履歴がありません</div>'; return; }
+      history.forEach(h=>{
+        const el = document.createElement('div');
+        el.className = 'list-item list-item-vertical';
+
+        // サムネイル（動画のみ）
+        const thumbUrl = getThumbnailUrl(h.type, h.id, h.listId);
+        if(thumbUrl){
+          const thumb = document.createElement('img');
+          thumb.className = 'thumbnail-large';
+          thumb.src = thumbUrl;
+          thumb.alt = 'サムネイル';
+          thumb.onerror = () => { thumb.style.display = 'none'; };
+          el.appendChild(thumb);
+        }
+
+        const txt = document.createElement('div');
+        if(h.type === 'playlist'){
+          txt.className = 'item-main-text list-item-id';
+          txt.textContent = h.listId;
+        }else{
+          txt.className = 'item-main-text';
+          txt.textContent = h.id;
+        }
+        txt.title = txt.textContent;
+        el.appendChild(txt);
+
+        // 横並びボタン
+        const btns = document.createElement('div');
+        btns.className = 'item-btn-row';
+        const play = document.createElement('button'); play.className='ghost'; play.textContent='▶';
+        const copy = document.createElement('button'); copy.className='ghost'; copy.textContent='📋';
+        const del = document.createElement('button'); del.className='ghost'; del.textContent='✘';
+        play.onclick = ()=>{ urlInput.value = h.original; updatePlayer(); };
+        copy.onclick = ()=>{ navigator.clipboard.writeText(h.nocookie).then(()=>alert('URLをコピーしました')); };
+        del.onclick = ()=>{ history = history.filter(x=>(x.id!==h.id || x.type!==h.type || x.listId!==h.listId)); saveJSON(KEY_HISTORY, history); renderHistory(); };
+
+        btns.appendChild(play);
+        btns.appendChild(copy);
+        btns.appendChild(del);
+
+        el.appendChild(btns);
+        historyList.appendChild(el);
+      });
+    }
+
+    // ---- お気に入りドラッグ＆ドロップ並べ替え ----
+    let dragFavIndex = null;
+    function renderFavs(){
+      favList.innerHTML = '';
+      if(favs.length===0){ favList.innerHTML = '<div class="muted small">お気に入りがありません</div>'; return; }
+      favs.forEach((h,i)=>{
+        const el = document.createElement('div');
+        el.className = 'list-item list-item-vertical';
+        el.draggable = true;
+        el.dataset.index = i;
+
+        // サムネイル（動画のみ）
+        const thumbUrl = getThumbnailUrl(h.type, h.id, h.listId);
+        if(thumbUrl){
+          const thumb = document.createElement('img');
+          thumb.className = 'thumbnail-large';
+          thumb.src = thumbUrl;
+          thumb.alt = 'サムネイル';
+          thumb.onerror = () => { thumb.style.display = 'none'; };
+          el.appendChild(thumb);
+        }
+
+        // ニックネームは小さく・見やすく
+        const txt = document.createElement('div');
+        txt.className = 'item-main-nickname';
+        txt.textContent = h.title || h.original || h.id || h.listId;
+        txt.title = h.original;
+        el.appendChild(txt);
+
+        // 横並びボタン
+        const btns = document.createElement('div');
+        btns.className = 'item-btn-row';
+        const play = document.createElement('button'); play.className='ghost'; play.textContent='▶';
+        const copy = document.createElement('button'); copy.className='ghost'; copy.textContent='📋';
+        const edit = document.createElement('button'); edit.className='ghost'; edit.textContent='✏';
+        const del = document.createElement('button'); del.className='ghost'; del.textContent='✘';
+
+        play.onclick = () => { urlInput.value = h.original; updatePlayer(); };
+        copy.onclick = () => { navigator.clipboard.writeText(h.nocookie).then(() => alert('URLをコピーしました')); };
+        edit.onclick = () => {
+          const newTitle = prompt('新しい名前を入力してください', h.title || h.original || h.id || h.listId);
+          if (newTitle !== null) {
+            h.title = newTitle.trim() || h.original || h.id || h.listId;
+            saveJSON(KEY_FAV, favs);
+            renderFavs();
+          }
+        };
+        del.onclick = () => { favs = favs.filter(x=>!(x.id===h.id && x.type===h.type && x.listId===h.listId)); saveJSON(KEY_FAV, favs); renderFavs(); };
+
+        btns.appendChild(play);
+        btns.appendChild(copy);
+        btns.appendChild(edit);
+        btns.appendChild(del);
+
+        el.appendChild(btns);
+
+        // ドラッグ＆ドロップ並べ替えイベント
+        el.addEventListener('dragstart', e=>{
+          dragFavIndex = i;
+          el.classList.add('dragging');
+        });
+        el.addEventListener('dragend', e=>{
+          el.classList.remove('dragging');
+          dragFavIndex = null;
+          favList.querySelectorAll('.over').forEach(x=>x.classList.remove('over'));
+        });
+        el.addEventListener('dragover', e=>{
+          e.preventDefault();
+          if(dragFavIndex===null || dragFavIndex===i) return;
+          favList.querySelectorAll('.over').forEach(x=>x.classList.remove('over'));
+          el.classList.add('over');
+        });
+        el.addEventListener('dragleave', e=>{
+          el.classList.remove('over');
+        });
+        el.addEventListener('drop', e=>{
+          e.preventDefault();
+          if(dragFavIndex===null || dragFavIndex===i) return;
+          // 並べ替え
+          const moved = favs.splice(dragFavIndex,1)[0];
+          favs.splice(i,0,moved);
+          saveJSON(KEY_FAV, favs);
+          renderFavs();
+        });
+
+        favList.appendChild(el);
+      });
+    }
+
+    function saveJSON(key,val){ localStorage.setItem(key, JSON.stringify(val)); }
+    function loadJSON(key){ const v = localStorage.getItem(key); return v ? JSON.parse(v) : null; }
+
+    playBtn.addEventListener('click', ()=>{ updatePlayer(); });
+    generateBtn.addEventListener('click', ()=>{
+      const parsed = parseYouTubeUrl(urlInput.value||'');
+      if(!parsed){ alert('有効なURL/ID/プレイリストIDを入力してください'); return; }
+      const nocookie = makeNoCookieUrl(parsed.id, parsed.params, parsed.type, parsed.listId);
+      current = { original: urlInput.value, nocookie, id: parsed.id, type: parsed.type, listId: parsed.listId };
+      generateCodeOutput();
+    });
+
+    copyUrl.addEventListener('click', ()=>{
+      if(!current.nocookie){ alert('先に動画を読み込んでください'); return; }
+      navigator.clipboard.writeText(current.nocookie).then(()=>alert('変換後URLをコピーしました'));
+    });
+    copyIframe.addEventListener('click', ()=>{
+      if(!current.nocookie){ alert('先に動画を読み込んでください'); return; }
+      const code = `<iframe src="${current.nocookie}" width="560" height="315" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+      navigator.clipboard.writeText(code).then(()=>alert('iframeコードをコピーしました'));
+    });
+
+    favBtn.addEventListener('click', ()=> toggleFav());
+    openBtn.addEventListener('click', ()=>{ if(!current.nocookie) return alert('先に動画を読み込んでください'); window.open(current.nocookie,'_blank'); });
+
+    clearHistory.addEventListener('click', ()=>{ if(confirm('履歴をクリアしますか？')){ history=[]; saveJSON(KEY_HISTORY, history); renderHistory(); } });
+    clearAll.addEventListener('click', ()=>{ if(confirm('すべてのデータ（履歴・お気に入り・テーマ）を消しますか？')){ localStorage.removeItem(KEY_HISTORY); localStorage.removeItem(KEY_FAV); localStorage.removeItem(KEY_THEME); history=[]; favs=[]; applyTheme('light'); renderHistory(); renderFavs(); } });
+
+    exportFavs.addEventListener('click', ()=>{
+      const data = JSON.stringify(favs, null, 2);
+      const blob = new Blob([data], {type:'application/json'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a'); a.href = url; a.download = 'freetubex_favs.json'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+    });
+
+    importFavs.addEventListener('click', ()=> importFavsFile.click());
+    importFavsFile.addEventListener('change', ()=>{
+      if(importFavsFile.files.length === 0) return;
+      const file = importFavsFile.files[0];
+      const reader = new FileReader();
+      reader.onload = function(e){
+        try {
+          const imported = JSON.parse(e.target.result);
+          if(!Array.isArray(imported)) throw new Error("形式が不正です（配列ではありません）");
+          // 既存favsと重複なしでマージ
+          let countBefore = favs.length;
+          imported.forEach(nf=>{
+            if(!nf || !nf.id || !nf.nocookie) return; // 最低限チェック
+            // id/type/listIdのセットで重複でないものだけ追加
+            if(!favs.find(f=>f.id===nf.id && f.type===nf.type && f.listId===nf.listId)) {
+              favs.push(nf);
+            }
+          });
+          saveJSON(KEY_FAV, favs);
+          renderFavs();
+          alert(`お気に入りをインポートしました（${favs.length-countBefore}件追加）`);
+        } catch(e){
+          alert('インポート失敗: JSONの形式が不正です');
+        }
+        importFavsFile.value = "";
+      };
+      reader.readAsText(file);
+    });
+
+    downloadHtml.addEventListener('click', ()=>{
+      if(!current.nocookie) return alert('先に動画を読み込んでください');
+      const html = `<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>FreeTubeX - Embedded</title></head><body>${codeOutput.textContent.replace(/</g,'&lt;').replace(/>/g,'&gt;')}</body></html>`;
+      const blob = new Blob([html],{type:'text/html'});
+      const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download = 'freetubex_embed.html'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+    });
+
+    // --- テーマ自動切替 (OS設定連動) ---
+    function prefersDark(){
+      return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    }
+    function applyTheme(name){
+      if(name==='auto'){
+        if(prefersDark()) document.documentElement.setAttribute('data-theme','dark');
+        else document.documentElement.removeAttribute('data-theme');
+        localStorage.setItem(KEY_THEME,'auto');
+        return;
+      }
+      if(name==='dark') document.documentElement.setAttribute('data-theme','dark');
+      else document.documentElement.removeAttribute('data-theme');
+      localStorage.setItem(KEY_THEME,name);
+    }
+    themeToggle.addEventListener('click', ()=>{
+      const cur = localStorage.getItem(KEY_THEME) || 'auto';
+      if(cur==='auto') applyTheme(prefersDark() ? 'light':'dark');
+      else if(cur==='dark') applyTheme('light');
+      else if(cur==='light') applyTheme('auto');
+    });
+    // OSテーマ変更イベント
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e=>{
+      const cur = localStorage.getItem(KEY_THEME) || 'auto';
+      if(cur==='auto') applyTheme('auto');
+    });
+
+    (function(){
+      const t = localStorage.getItem(KEY_THEME) || 'auto';
+      applyTheme(t);
+    })();
+
+    window.addEventListener('dragover', e=>e.preventDefault());
+    window.addEventListener('drop', e=>{
+      e.preventDefault();
+      const text = (e.dataTransfer.getData('text') || '').trim();
+      if(text) { urlInput.value = text; updatePlayer(); }
+    });
+
+    window.addEventListener('keydown', e=>{
+      if((e.ctrlKey||e.metaKey) && e.key.toLowerCase()==='k'){ e.preventDefault(); urlInput.focus(); }
+      if((e.ctrlKey||e.metaKey) && e.key.toLowerCase()==='b'){ e.preventDefault(); toggleFav(); }
+    });
+
+    function init(){ renderHistory(); renderFavs(); updateFavButton(); }
+    init();
+
+    [optAutoplay,optLoop,optControls,optStart].forEach(inp=>inp.addEventListener('change', ()=>{ if(current.id || current.listId){ current.nocookie = makeNoCookieUrl(current.id, {}, current.type, current.listId); renderIframe(current.nocookie); generateCodeOutput(); saveCurrentToHistoryTimestamp(); } }));
+
+    function saveCurrentToHistoryTimestamp(){ const idx = history.findIndex(h=>(h.id===current.id && h.type===current.type && h.listId===current.listId)); if(idx!==-1){ history[idx].nocookie = current.nocookie; history[idx].ts = Date.now(); saveJSON(KEY_HISTORY, history); renderHistory(); } }
+
+    window.FreeTubeX = { parseYouTubeUrl, makeNoCookieUrl };
+
+    // 動画/プレイリストお気に入り追加OK
+    function toggleFav() {
+      const isVideo = current.type === "video" && current.id && current.id.length === 11;
+      const isPlaylist = current.type === "playlist" && current.listId && /^PL[a-zA-Z0-9-_]{16,}$/.test(current.listId);
+      if (!isVideo && !isPlaylist) {
+        alert('お気に入りに追加できるのは通常のYouTube動画（11文字の動画ID）かプレイリスト（PLで始まるID）だけです。\n動画またはプレイリストを正しく再生後に追加してください。');
+        return;
+      }
+      const existing = favs.find(f => f.id === current.id && f.type === current.type && f.listId === current.listId);
+      if (existing) {
+        favs = favs.filter(f => !(f.id === current.id && f.type === current.type && f.listId === current.listId));
+      } else {
+        let defaultTitle = isVideo ? (current.original || current.id)
+          : isPlaylist ? (current.original || current.listId)
+          : '';
+        const title = prompt('お気に入りの名前を入力してください', defaultTitle);
+        if (title === null) return;
+        favs.unshift({
+          id: current.id,
+          type: current.type,
+          listId: current.listId,
+          original: current.original,
+          nocookie: current.nocookie,
+          title: title.trim() || defaultTitle,
+          ts: Date.now()
+        });
+      }
+      saveJSON(KEY_FAV, favs);
+      renderFavs();
+      updateFavButton();
+    }
+  </script>
+</body>
+</html>
