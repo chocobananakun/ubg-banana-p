@@ -4,4 +4,5 @@ const categories = [
     { name: "Arcade", link: "arcade.html" },
     { name: "Puzzle", link: "puzzle.html" },
     { name: "Battle", link: "battle.html" },
+    { name: "Other", link: "other.html" },
 ];
