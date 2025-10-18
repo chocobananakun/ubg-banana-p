@@ -16,4 +16,6 @@ const games = [
     { name: "Cookie Clicker", image: "image/cookie.png", description: "Chaos", link: "cookieclicker-gh-pages/index.html", category: "Action,Arcade" },
     { name: "FreeTubeX Local", image: "image/free.png", description: "Tool", link: "freetubex_local.html", category: "Other" },
     { name: "Geometry Dash", image: "image/geodash.png", description: "Rhythm", link: "geodash.html", category: "Rhythm" },
+    { name: "Geometry Dash Meltdown", image: "image/meltdown.png", description: "Rhythm", link: "meltdown.html", category: "Rhythm" },
+    { name: "Geometry Dash Subzero", image: "image/subzero.png", description: "Rhythm", link: "subzero.html", category: "Rhythm" },
 ];
