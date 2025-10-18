@@ -15,4 +15,5 @@ const games = [
     { name: "dino", image: "image/dino.png", description: "minigame", link: "dino.html", category: "Action,Arcade" },
     { name: "Cookie Clicker", image: "image/cookie.png", description: "Chaos", link: "cookieclicker-gh-pages/index.html", category: "Action,Arcade" },
     { name: "FreeTubeX Local", image: "image/free.png", description: "Tool", link: "freetubex_local.html", category: "Other" },
+    { name: "Geometry Dash", image: "image/geodash.png", description: "Rhythm", link: "geodash.html", category: "Rhythm" },
 ];
