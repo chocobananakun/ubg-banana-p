@@ -5,4 +5,5 @@ const categories = [
     { name: "Puzzle", link: "puzzle.html" },
     { name: "Battle", link: "battle.html" },
     { name: "Other", link: "other.html" },
+    { name: "Rhythm", link: "rhythm.html" },
 ];
