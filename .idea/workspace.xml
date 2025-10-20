@@ -5,11 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="83f018de-a780-492d-8a4b-061ff8334239" name="変更" comment="">
-      <change afterPath="$PROJECT_DIR$/pages/1.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/2048multi.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/9007199254740992.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/flappy2048.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/n-gon.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/games.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/games.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
