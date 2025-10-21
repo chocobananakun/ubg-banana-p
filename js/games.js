@@ -23,5 +23,5 @@ const games = [
     { name: "Geometry Dash Meltdown", image: "image/meltdown.png", description: "Rhythm", link: "meltdown.html", category: "Rhythm" },
     { name: "Geometry Dash Subzero", image: "image/subzero.png", description: "Rhythm", link: "subzero.html", category: "Rhythm" },
     { name: "SUPER MARIO BROS", image: "image/mario.png", description: "Really?", link: "mario.html", category: "Action,Arcade" },
-    { name: "n-gon", image: "image/n-gon.png", description: "GG!", link: "main/n-gon/index.html", category: "Action" },
+    { name: "n-gon", image: "image/n-gon.png", description: "GG!", link: "n-gon.html", category: "Action" },
 ];
